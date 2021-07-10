@@ -1,0 +1,164 @@
+#vue3-snackbar--container {
+	position: fixed;
+	margin: 2vh 2vw;
+	padding: 2em;
+	z-index: var(--snackbar-zindex);
+
+	&.is-top {
+		top: 0;
+	}
+
+	&.is-bottom {
+		bottom: 0;
+	}
+
+	&.is-left {
+		left: 0;
+	}
+
+	&.is-right {
+		right: 0;
+	}
+
+	&.is-middle {
+		top: 50%;
+		transform: translateY(-50%);
+	}
+
+	&.is-centre {
+		left: 50%;
+		transform: translateX(-50%);
+	}
+}
+
+.vue3-snackbar-message {
+	display: flex;
+	color: #fff;
+	display: block;
+	margin-bottom: 16px;
+	position: relative;
+	border-radius: 4px;
+
+	&.success:not(.has-background) {
+		background-color: var(--success-colour);
+		border-color: var(--success-colour);
+	}
+	&.error:not(.has-background) {
+		background-color: var(--error-colour);
+		border-color: var(--error-colour);
+	}
+	&.warning:not(.has-background) {
+		background-color: var(--warning-colour);
+		border-color: var(--warning-colour);
+	}
+	&.info:not(.has-background) {
+		background-color: var(--info-colour);
+		border-color: var(--info-colour);
+	}
+	&.has-background {
+		background-color: var(--message-background);
+		border-color: var(--message-background);
+	}
+
+	&-wrapper {
+		align-items: center;
+		border-radius: inherit;
+		display: flex;
+		padding: 16px;
+	}
+
+	&.is-dense .vue3-snackbar-message-wrapper {
+		padding: 8px 16px;
+	}
+
+	&-title {
+		font-weight: bold;
+	}
+
+	&-icon {
+		margin-right: 16px;
+		display: flex;
+	}
+
+	&-close {
+		margin-left: 16px;
+		min-width: 30px;
+
+		button {
+			-webkit-appearance: none;
+			&:focus:not(:focus-visible) {
+				outline: none;
+			}
+			&:focus:not(:-moz-focusring) {
+				outline: none;
+			}
+			border: none;
+			margin: 0;
+			padding: 0;
+			width: auto;
+			overflow: visible;
+			background: transparent;
+			color: inherit;
+			font: inherit;
+			line-height: normal;
+			-webkit-font-smoothing: inherit;
+			-moz-osx-font-smoothing: inherit;
+			text-align: inherit;
+			cursor: pointer;
+			width: 30px;
+			height: 30px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			position: relative;
+
+			&::before {
+				position: absolute;
+				content: "";
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: currentColor;
+				opacity: 0;
+				pointer-events: none;
+				transition: opacity 300ms ease-in-out;
+				border-radius: 50%;
+			}
+
+			&:hover::before {
+				opacity: 0.22;
+			}
+		}
+	}
+
+	&-content {
+		display: flex;
+		flex-flow: column;
+		width: min(50vw, 350px);
+	}
+}
+
+.vue3-snackbar-message-enter-from {
+	opacity: 0;
+	-webkit-transform: translateY(50%);
+	-ms-transform: translateY(50%);
+	transform: translateY(50%);
+}
+.vue3-snackbar-message-leave-from {
+	max-height: 1000px;
+}
+.vue3-snackbar .vue3-snackbar-message.vue3-snackbar-message-leave-to {
+	max-height: 0;
+	opacity: 0;
+	margin-bottom: 0;
+	overflow: hidden;
+}
+.vue3-snackbar-message-enter-active {
+	-webkit-transition: transform 0.3s, opacity 0.3s;
+	transition: transform 0.3s, opacity 0.3s;
+}
+.vue3-snackbar-message-leave-active {
+	-webkit-transition: max-height 0.45s cubic-bezier(0, 1, 0, 1), opacity 0.3s, margin-bottom 0.3s;
+	transition: max-height 0.45s cubic-bezier(0, 1, 0, 1), opacity 0.3s, margin-bottom 0.3s;
+}

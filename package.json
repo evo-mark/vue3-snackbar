@@ -1,0 +1,61 @@
+{
+	"name": "vue3-snackbar",
+	"version": "1.0.0",
+	"files": [
+		"dist"
+	],
+	"main": "./dist/vue3-snackbar.umd.js",
+	"module": "./dist/vue3-snackbar.es.js",
+	"exports": {
+		".": {
+			"import": "./dist/vue3-snackbar.es.js",
+			"require": "./dist/vue3-snackbar.umd.js"
+		}
+	},
+	"scripts": {
+		"demo": "vite serve",
+		"build": "vite build -c vite-build.config.js"
+	},
+	"dependencies": {
+		"core-js": "^3.6.5",
+		"tiny-emitter": "^2.1.0",
+		"vue3-icon": "^2.0.0"
+	},
+	"peerDependencies": {
+		"vue": "^3.0.0"
+	},
+	"devDependencies": {
+		"@mdi/js": "^5.9.55",
+		"@vitejs/plugin-vue": "^1.2.3",
+		"@vue/compiler-sfc": "^3.0.0",
+		"babel-eslint": "^10.1.0",
+		"eslint": "^7.30.0",
+		"eslint-plugin-vue": "^7.0.0-beta.4",
+		"postcss": "^8.3.5",
+		"sass": "^1.35.2",
+		"sass-loader": "^8.0.2",
+		"vite": "^2.3.7"
+	},
+	"eslintConfig": {
+		"root": true,
+		"env": {
+			"node": true
+		},
+		"extends": [
+			"plugin:vue/vue3-essential",
+			"eslint:recommended"
+		],
+		"parserOptions": {
+			"parser": "babel-eslint"
+		},
+		"rules": {
+			"no-unused-vars": "off",
+			"no-undef": "off"
+		}
+	},
+	"browserslist": [
+		"> 1%",
+		"last 2 versions",
+		"not dead"
+	]
+}
