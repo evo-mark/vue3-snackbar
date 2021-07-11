@@ -18,13 +18,13 @@ const samples = [
         type: 'info',
         title: 'Important Information',
         text: 'Some important information will appear here',
-        dismissable: false
+        dismissible: false
     },
     {
         type: 'info',
         text: 'This information doesn\'t have a title',
         duration: 5000,
-        dismissable: false
+        dismissible: false
     },
     {
         type: 'warning',

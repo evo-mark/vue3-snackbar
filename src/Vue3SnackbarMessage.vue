@@ -24,7 +24,7 @@
             </div>
             <div class="spacer"></div>
             <div class="vue3-snackbar-message-close">
-                <button @click="dismissClick" v-if="props.message.dismissable !== false">
+                <button @click="dismissClick" v-if="props.message.dismissible !== false">
                     <vue3-icon type="mdi" :path="mdiClose" />
                 </button>
             </div>
