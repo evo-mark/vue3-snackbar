@@ -6,12 +6,6 @@
 	],
 	"main": "./dist/vue3-snackbar.umd.js",
 	"module": "./dist/vue3-snackbar.es.js",
-	"exports": {
-		".": {
-			"import": "./dist/vue3-snackbar.es.js",
-			"require": "./dist/vue3-snackbar.umd.js"
-		}
-	},
 	"scripts": {
 		"demo": "vite serve",
 		"build": "vite build -c vite-build.config.js"
