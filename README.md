@@ -4,6 +4,16 @@ Add a snackbar/toast service to your Vue 3 application and easily alert users ab
 
 ## Installation
 
+```
+npm install vue3-snackbar
+```
+or
+```
+yarn add vue3-snackbar
+```
+
+Don't forget to import the library's stylesheet into your app.
+
 *main.js*
 ```js
 import { createApp } from "vue";

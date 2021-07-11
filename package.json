@@ -16,6 +16,24 @@
 		"demo": "vite serve",
 		"build": "vite build -c vite-build.config.js"
 	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/craigrileyuk/vue3-snackbar.git"
+	},
+	"keywords": [
+		"Vue",
+		"Vue3",
+		"snackbar",
+		"toast",
+		"alerts",
+		"messages"
+	],
+	"author": "Craig Riley",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/craigrileyuk/vue3-snackbar/issues"
+	},
+	"homepage": "https://github.com/craigrileyuk/vue3-snackbar#readme",
 	"dependencies": {
 		"core-js": "^3.6.5",
 		"tiny-emitter": "^2.1.0",
