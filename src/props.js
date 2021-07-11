@@ -14,7 +14,7 @@ export const propsModel = {
 	 */
 	bottom: {
 		type: Boolean,
-		default: true,
+		default: false,
 	},
 	/**
 	 * Render the snackbar on the left of the screen
@@ -28,7 +28,7 @@ export const propsModel = {
 	 */
 	right: {
 		type: Boolean,
-		default: true,
+		default: false,
 	},
 	/* ******************************************
 	 * COLOUR PROPS

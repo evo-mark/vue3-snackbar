@@ -6,7 +6,7 @@
 </template>
 
 <script setup>
-import { useSnackbar } from "../";
+import { useSnackbar } from "../src";
 import { mdiImage } from "@mdi/js";
 const samples = [
     {

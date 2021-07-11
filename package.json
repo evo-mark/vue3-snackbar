@@ -1,6 +1,6 @@
 {
 	"name": "vue3-snackbar",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"files": [
 		"dist"
 	],
@@ -8,6 +8,8 @@
 	"module": "./dist/vue3-snackbar.es.js",
 	"scripts": {
 		"demo": "vite serve",
+		"demo:build": "vite build",
+		"demo:deploy": "gh-pages -d demo/dist",
 		"build": "vite build -c vite-build.config.js"
 	},
 	"repository": {
@@ -37,16 +39,21 @@
 		"vue": "^3.0.0"
 	},
 	"devDependencies": {
+		"@babel/core": "^7.14.6",
 		"@mdi/js": "^5.9.55",
 		"@vitejs/plugin-vue": "^1.2.3",
 		"@vue/compiler-sfc": "^3.0.0",
 		"babel-eslint": "^10.1.0",
+		"babel-loader": "^8.2.2",
 		"eslint": "^7.30.0",
 		"eslint-plugin-vue": "^7.0.0-beta.4",
+		"gh-pages": "^3.2.3",
 		"postcss": "^8.3.5",
 		"sass": "^1.35.2",
 		"sass-loader": "^8.0.2",
-		"vite": "^2.3.7"
+		"vite": "^2.3.7",
+		"vue-loader": "^16.3.0",
+		"vue": "^3.0.0"
 	},
 	"eslintConfig": {
 		"root": true,
