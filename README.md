@@ -19,6 +19,7 @@ app.mount("#app");
 *App.vue*
 ```html
 <template>
+<!-- While teleporting the snackbar isn't required, it can help resolve z-index issues -->
 <teleport to="body">
     <vue3-snackbar bottom right :duration="4000"></vue3-snackbar>
 </teleport>
