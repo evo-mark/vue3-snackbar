@@ -1,42 +1,22 @@
 {
 	"name": "vue3-snackbar",
 	"version": "1.0.1",
+	"author": "Craig Riley",
+	"scripts": {
+		"build": "vite build -c vite-build.config.js",
+		"demo": "vite serve",
+		"demo:build": "vite build",
+		"demo:deploy": "gh-pages -d demo/dist"
+	},
+	"main": "./dist/vue3-snackbar.umd.js",
+	"module": "./dist/vue3-snackbar.es.js",
 	"files": [
 		"dist"
 	],
-	"main": "./dist/vue3-snackbar.umd.js",
-	"module": "./dist/vue3-snackbar.es.js",
-	"scripts": {
-		"demo": "vite serve",
-		"demo:build": "vite build",
-		"demo:deploy": "gh-pages -d demo/dist",
-		"build": "vite build -c vite-build.config.js"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/craigrileyuk/vue3-snackbar.git"
-	},
-	"keywords": [
-		"Vue",
-		"Vue3",
-		"snackbar",
-		"toast",
-		"alerts",
-		"messages"
-	],
-	"author": "Craig Riley",
-	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/craigrileyuk/vue3-snackbar/issues"
-	},
-	"homepage": "https://github.com/craigrileyuk/vue3-snackbar#readme",
 	"dependencies": {
 		"core-js": "^3.6.5",
 		"tiny-emitter": "^2.1.0",
 		"vue3-icon": "^2.0.0"
-	},
-	"peerDependencies": {
-		"vue": "^3.0.0"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.14.6",
@@ -49,10 +29,17 @@
 		"eslint-plugin-vue": "^7.0.0-beta.4",
 		"gh-pages": "^3.2.3",
 		"postcss": "^8.3.5",
-		"sass": "^1.35.2",
-		"sass-loader": "^8.0.2",
+		"prismjs": "^1.24.1",
+		"roboto-fontface": "*",
+		"sass": "~1.32.0",
+		"sass-loader": "^10.0.0",
 		"vite": "^2.3.7",
+		"vue": "^3.0.0",
+		"vue-cli-plugin-vuetify": "~2.4.1",
 		"vue-loader": "^16.3.0",
+		"vuetify": "^3.0.0-alpha.9"
+	},
+	"peerDependencies": {
 		"vue": "^3.0.0"
 	},
 	"eslintConfig": {
@@ -76,5 +63,22 @@
 		"> 1%",
 		"last 2 versions",
 		"not dead"
-	]
+	],
+	"bugs": {
+		"url": "https://github.com/craigrileyuk/vue3-snackbar/issues"
+	},
+	"homepage": "https://github.com/craigrileyuk/vue3-snackbar#readme",
+	"keywords": [
+		"Vue",
+		"Vue3",
+		"snackbar",
+		"toast",
+		"alerts",
+		"messages"
+	],
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/craigrileyuk/vue3-snackbar.git"
+	}
 }
