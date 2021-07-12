@@ -57,7 +57,7 @@ export const propsModel = {
 	 */
 	duration: {
 		type: Number,
-		default: 4000,
+		default: null,
 	},
 	/**
 	 * Class string to add to each message

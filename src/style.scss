@@ -1,8 +1,9 @@
 #vue3-snackbar--container {
 	position: fixed;
-	margin: 2vh 2vw;
-	padding: 2em;
+	margin: 16px 16px 0 16px;
+	padding: 0;
 	z-index: var(--snackbar-zindex);
+	pointer-events: none;
 
 	&.is-top {
 		top: 0;
@@ -38,6 +39,7 @@
 	margin-bottom: 16px;
 	position: relative;
 	border-radius: 4px;
+	pointer-events: all;
 
 	&.success:not(.has-background) {
 		background-color: var(--success-colour);

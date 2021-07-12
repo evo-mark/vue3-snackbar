@@ -2,7 +2,7 @@ import vue from "@vitejs/plugin-vue";
 
 export default {
 	root: "demo",
-	base: "/",
+	base: "/vue3-snackbar/",
 	assetsDir: "",
 	plugins: [vue()],
 };

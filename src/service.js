@@ -1,5 +1,7 @@
 import EventBus from "./eventbus";
-import { inject } from "vue";
+import { inject, ref } from "vue";
+
+export const messages = ref([]);
 
 /**
  * A unique identifier to access the provided/injected method

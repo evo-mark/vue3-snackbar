@@ -22,6 +22,7 @@
 import SnackbarMessage from "./Vue3SnackbarMessage.vue";
 import { defineProps, computed, ref, onMounted, onUnmounted } from "vue";
 import { propsModel } from "./props.js";
+import { messages } from "./service.js";
 import EventBus from "./eventbus";
 
 const props = defineProps({ ...propsModel });
@@ -48,7 +49,6 @@ const generatedBaseStyles = computed(() => {
 })
 
 let messageId = 1;
-const messages = ref([]);
 
 onMounted(() => {
     EventBus.$on('add', (ev) => {

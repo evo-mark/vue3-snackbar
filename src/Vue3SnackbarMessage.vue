@@ -57,6 +57,11 @@ onMounted(() => {
             dismiss();
         }, props.message.duration);
     }
+    else if (!props.message.duration && props.message.dismissible === false) {
+        timeout = setTimeout(() => {
+            dismiss();
+        }, 4000);
+    }
 })
 const dismissClick = () => {
     if (timeout) clearTimeout(timeout);
