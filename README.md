@@ -2,6 +2,8 @@
 
 Add a snackbar/toast service to your Vue 3 application and easily alert users about app processes.
 
+**[Demo Site](https://craigrileyuk.github.io/vue3-snackbar/)**
+
 ## Installation
 
 ```
