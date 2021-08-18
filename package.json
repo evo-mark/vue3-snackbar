@@ -1,6 +1,6 @@
 {
 	"name": "vue3-snackbar",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"author": "Craig Riley",
 	"scripts": {
 		"build": "vite build -c vite-build.config.js",
