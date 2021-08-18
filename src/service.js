@@ -35,7 +35,7 @@ export const SnackbarService = {
 			},
 		};
 		app.config.globalProperties.$snackbar = SnackbarService;
-		if (window) window.$snackbar = SnackbarService;
+		if (typeof window !== "undefined") window.$snackbar = SnackbarService;
 		app.provide(SnackbarSymbol, SnackbarService);
 	},
 };
