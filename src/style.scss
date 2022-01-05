@@ -139,6 +139,21 @@
 		flex-flow: column;
 		width: min(50vw, 350px);
 	}
+
+	&-badge {
+		font-size: 0.9em;
+		font-weight: bold;
+		padding: 0.125em 0.5em;
+		border-radius: 8px;
+		position: absolute;
+		background: #c10015;
+		border: 1px solid crimson;
+		box-shadow: 0 1px 3px #0003, 0 1px 1px #00000024, 0 2px 1px -1px #0000001f;
+		color: white;
+		top: 0;
+		left: 0;
+		transform: translate(-25%, -25%);
+	}
 }
 
 .vue3-snackbar-message-enter-from {
@@ -155,6 +170,10 @@
 	opacity: 0;
 	margin-bottom: 0;
 	overflow: hidden;
+
+	.vue3-snackbar-message-badge {
+		opacity: 0;
+	}
 }
 .vue3-snackbar-message-enter-active {
 	-webkit-transition: transform 0.3s, opacity 0.3s;
@@ -163,4 +182,36 @@
 .vue3-snackbar-message-leave-active {
 	-webkit-transition: max-height 0.45s cubic-bezier(0, 1, 0, 1), opacity 0.3s, margin-bottom 0.3s;
 	transition: max-height 0.45s cubic-bezier(0, 1, 0, 1), opacity 0.3s, margin-bottom 0.3s;
+}
+
+@keyframes headShake {
+	0% {
+		transform: translate(-25%, -25%);
+	}
+
+	6.5% {
+		transform: translate(calc(-25% - 6px), -25%) rotateY(-9deg);
+	}
+
+	18.5% {
+		transform: translate(calc(-25% + 5px), -25%) rotateY(7deg);
+	}
+
+	31.5% {
+		transform: translate(calc(-25% - 3px), -25%) rotateY(-5deg);
+	}
+
+	43.5% {
+		transform: translate(calc(-25% + 2px), -25%) rotateY(3deg);
+	}
+
+	50% {
+		transform: translate(-25%, -25%);
+	}
+}
+.shake-baby-shake .vue3-snackbar-message-badge {
+	animation-timing-function: ease-in-out;
+	animation-name: headShake;
+	animation-duration: 1s;
+	animation-fill-mode: both;
 }

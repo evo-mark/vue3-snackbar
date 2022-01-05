@@ -79,4 +79,11 @@ export const propsModel = {
 		type: Boolean,
 		default: false,
 	},
+	/**
+	 * Use snackbar groups with messages with the same group-key
+	 */
+	groups: {
+		type: Boolean,
+		default: false,
+	},
 };

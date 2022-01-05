@@ -1,26 +1,26 @@
 <template>
-    <section
-        id="vue3-snackbar--container"
-        :class="[generatedBaseClasses]"
-        class="vue3-snackbar"
-        :style="generatedBaseStyles"
-    >
-        <transition-group name="vue3-snackbar-message" tag="div">
-            <SnackbarMessage
-                v-for="message in messages"
-                :key="message.id"
-                :message="message"
-                :message-class="props.messageClass"
-                :dense="props.dense"
-                @dismiss="remove($event)"
-            />
-        </transition-group>
-    </section>
+	<section
+		id="vue3-snackbar--container"
+		:class="[generatedBaseClasses]"
+		class="vue3-snackbar"
+		:style="generatedBaseStyles"
+	>
+		<transition-group name="vue3-snackbar-message" tag="div">
+			<SnackbarMessage
+				v-for="message in messages"
+				:key="message.id"
+				:message="message"
+				:message-class="props.messageClass"
+				:dense="props.dense"
+				@dismiss="remove($event)"
+			/>
+		</transition-group>
+	</section>
 </template>
 
 <script setup>
 import SnackbarMessage from "./Vue3SnackbarMessage.vue";
-import { defineProps, computed, ref, onMounted, onUnmounted } from "vue";
+import { computed, onMounted, onUnmounted } from "vue";
 import { propsModel } from "./props.js";
 import { messages } from "./service.js";
 import EventBus from "./eventbus";
@@ -28,54 +28,66 @@ import EventBus from "./eventbus";
 const props = defineProps({ ...propsModel });
 
 const generatedBaseClasses = computed(() => {
-    return {
-        'is-top': props.top,
-        'is-bottom': props.top === false && props.bottom,
-        'is-left': props.left,
-        'is-right': props.left === false && props.right,
-        'is-middle': props.top === false && props.bottom === false,
-        'is-centre': props.left === false && props.right === false
-    }
-})
+	return {
+		"is-top": props.top,
+		"is-bottom": props.top === false && props.bottom,
+		"is-left": props.left,
+		"is-right": props.left === false && props.right,
+		"is-middle": props.top === false && props.bottom === false,
+		"is-centre": props.left === false && props.right === false,
+	};
+});
 
 const generatedBaseStyles = computed(() => {
-    return {
-        '--success-colour': props.success,
-        '--error-colour': props.error,
-        '--warning-colour': props.warning,
-        '--info-colour': props.info,
-        '--snackbar-zindex': props.zindex
-    }
-})
+	return {
+		"--success-colour": props.success,
+		"--error-colour": props.error,
+		"--warning-colour": props.warning,
+		"--info-colour": props.info,
+		"--snackbar-zindex": props.zindex,
+	};
+});
+
+const hashCode = (s) => Math.abs(s.split("").reduce((a, b) => ((a << 5) - a + b.charCodeAt(0)) | 0, 0));
 
 let messageId = 1;
 
 onMounted(() => {
-    EventBus.$on('add', (ev) => {
-        if (props.duration && !ev.duration) ev.duration = props.duration;
-        const message = {
-            ...ev,
-            id: messageId,
-        }
-        messages.value.push(message)
-        messageId++;
-    });
+	EventBus.$on("add", (ev) => {
+		if (!ev.group) ev.group = hashCode(`${ev.type}${ev.title}${ev.text}`).toString(16);
+		// If there's a default duration and no message duration is set, use the default
+		if (props.duration && !ev.duration && ev.duration !== 0) ev.duration = props.duration;
+		// Find the existing message if one with the same group-key already exists
+		const existingGroup = ev.group && messages.value.find((msg) => msg.group === ev.group);
 
-    EventBus.$on('clear', () => {
-        messages.value = [];
-    })
-})
+		if (props.groups === false || !existingGroup) {
+			const message = {
+				...ev,
+				id: messageId,
+				count: 1,
+			};
+			messages.value.push(message);
+			messageId++;
+		} else {
+			existingGroup.count++;
+		}
+	});
+
+	EventBus.$on("clear", () => {
+		messages.value = [];
+	});
+});
 
 onUnmounted(() => {
-    EventBus.$off('add');
-    EventBus.$off('clear');
-})
+	EventBus.$off("add");
+	EventBus.$off("clear");
+});
 
 const remove = (ev) => {
-    messages.value = messages.value.filter(message => {
-        return message.id !== ev.id;
-    })
-}
+	messages.value = messages.value.filter((message) => {
+		return message.id !== ev.id;
+	});
+};
 </script>
 
 <style lang="scss">

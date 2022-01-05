@@ -78,6 +78,7 @@ export default {
 | **messageClass**| String  | null      | *Adds a custom class to every message*                                      |
 | **zindex**      | Number  | 10000     | *The z-index setting for the snackbar container*                            |
 | **dense**       | Boolean | false     | *Reduce the y-axis padding around each message*                             |
+| **groups**      | Boolean | false     | *Group messages with the same group-key*                             |
 ---
 ## Methods
 
@@ -85,14 +86,15 @@ export default {
 
 Adds a new snackbar message to the stack
 
-| Property        | Type    | Default | Description                                                                 |
-| --------------- | ------- | ------- | --------------------------------------------------------------------------- |
-| **type**        | String  | null    | *Use a preset icon and colour scheme for common alert types (see below)*    |
-| **background**  | String  | null    | *Set the background colour manually for the message. Accepts any CSS value* |
-| **title**       | String  | ""      | *The title of the message*                                                  |
-| **text**        | String  | ""      | *The body of the message*                                                   |
-| **dismissible** | Boolean | true    | *Allow the user to manually dismiss the message via a close button*         |
-| **icon**        | Object  | {}      | *Manually set the icon for the message (see below)*                         |
+| Property        | Type    | Default     | Description                                                                 |
+| --------------- | ------- | ----------- | --------------------------------------------------------------------------- |
+| **type**        | String  | null        | *Use a preset icon and colour scheme for common alert types (see below)*    |
+| **background**  | String  | null        | *Set the background colour manually for the message. Accepts any CSS value* |
+| **title**       | String  | ""          | *The title of the message*                                                  |
+| **text**        | String  | ""          | *The body of the message*                                                   |
+| **dismissible** | Boolean | true        | *Allow the user to manually dismiss the message via a close button*         |
+| **icon**        | Object  | {}          | *Manually set the icon for the message (see below)*                         |
+| **groupKey**    | String  | (see desc.) | *Message group key (for when groups are enabled). Defaults to a string hash based on type, title and text*                           |
 
 > Type: success, error, warning, info
 

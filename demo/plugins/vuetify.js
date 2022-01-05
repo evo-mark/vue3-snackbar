@@ -1,7 +1,7 @@
-import "vuetify/lib/styles/main.sass";
+import "vuetify/styles";
 import { createVuetify } from "vuetify";
 import { aliases, mdi } from "vuetify/lib/iconsets/mdi-svg";
-import * as components from "./components";
+// import * as components from "./components";
 // import * as directives from "vuetify/lib/directives";
 
 const vueLightTheme = {
@@ -15,7 +15,7 @@ const vueLightTheme = {
 };
 
 export default createVuetify({
-	components,
+	// components,
 	//	directives,
 	icons: {
 		defaultSet: "mdi",
