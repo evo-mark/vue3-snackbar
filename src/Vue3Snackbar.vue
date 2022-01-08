@@ -12,7 +12,7 @@
 				:message="message"
 				:message-class="props.messageClass"
 				:dense="props.dense"
-				@dismiss="remove($event)"
+				@dismiss="remove($event, true)"
 			/>
 		</transition-group>
 	</section>
@@ -20,14 +20,15 @@
 
 <script setup>
 import SnackbarMessage from "./Vue3SnackbarMessage.vue";
-import { computed, onMounted, onUnmounted } from "vue";
+import { onMounted, onUnmounted } from "vue";
 import { propsModel } from "./props.js";
 import { messages } from "./service.js";
 import EventBus from "./eventbus";
 
 const props = defineProps({ ...propsModel });
+const emit = defineEmits(["added", "dismissed", "removed", "cleared"]);
 
-const generatedBaseClasses = computed(() => {
+const generatedBaseClasses = $computed(() => {
 	return {
 		"is-top": props.top,
 		"is-bottom": props.top === false && props.bottom,
@@ -38,7 +39,7 @@ const generatedBaseClasses = computed(() => {
 	};
 });
 
-const generatedBaseStyles = computed(() => {
+const generatedBaseStyles = $computed(() => {
 	return {
 		"--success-colour": props.success,
 		"--error-colour": props.error,
@@ -54,6 +55,7 @@ let messageId = 1;
 
 onMounted(() => {
 	EventBus.$on("add", (ev) => {
+		emit("added", ev);
 		if (!ev.group) ev.group = hashCode(`${ev.type}${ev.title}${ev.text}`).toString(16);
 		// If there's a default duration and no message duration is set, use the default
 		if (props.duration && !ev.duration && ev.duration !== 0) ev.duration = props.duration;
@@ -66,7 +68,8 @@ onMounted(() => {
 				id: messageId,
 				count: 1,
 			};
-			messages.value.push(message);
+			if (props.reverse) messages.value.unshift(message);
+			else messages.value.push(message);
 			messageId++;
 		} else {
 			existingGroup.count++;
@@ -74,6 +77,7 @@ onMounted(() => {
 	});
 
 	EventBus.$on("clear", () => {
+		emit("cleared");
 		messages.value = [];
 	});
 });
@@ -83,7 +87,9 @@ onUnmounted(() => {
 	EventBus.$off("clear");
 });
 
-const remove = (ev) => {
+const remove = (ev, wasDismissed = false) => {
+	if (wasDismissed) emit("dismissed", ev);
+	else emit("removed", ev);
 	messages.value = messages.value.filter((message) => {
 		return message.id !== ev.id;
 	});

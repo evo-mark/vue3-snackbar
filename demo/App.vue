@@ -123,6 +123,9 @@
 									<div class="mb-4">
 										<Switch v-model:checked="options.groups" label="Enable Groups" />
 									</div>
+									<div class="mb-4">
+										<Switch v-model:checked="options.reverse" label="Reverse Stack Order" />
+									</div>
 								</div>
 								<div class="mb-4">
 									<v-btn @click="addRandomMessage" color="secondary" block>Add Message</v-btn>
@@ -162,6 +165,7 @@
 			:duration="options.duration"
 			:dense="options.dense"
 			:groups="options.groups"
+			:reverse="options.reverse"
 		></vue3-snackbar>
 	</teleport>
 </template>
@@ -199,6 +203,7 @@ const options = reactive({
 	duration: 0,
 	dense: false,
 	groups: false,
+	reverse: false,
 });
 
 const code = computed(() => {

@@ -78,7 +78,8 @@ export default {
 | **messageClass**| String  | null      | *Adds a custom class to every message*                                      |
 | **zindex**      | Number  | 10000     | *The z-index setting for the snackbar container*                            |
 | **dense**       | Boolean | false     | *Reduce the y-axis padding around each message*                             |
-| **groups**      | Boolean | false     | *Group messages with the same group-key*                             |
+| **groups**      | Boolean | false     | *Group messages with the same group-key*                                    |
+| **reverse**     | Boolean | false     | *Reverse the stacking order of snackbar messages*                           |
 ---
 ## Methods
 
@@ -105,3 +106,15 @@ Adds a new snackbar message to the stack
 `snackbar.clear()`
 
 Remove all snackbar messages from the stack.
+
+---
+## Events
+
+Event emitted by the component. You can subscribe to these by using `@` or `v-on:` on the component in your template.
+
+| Event           | Parameters       | Description                                                               |
+| --------------- | ---------------- | ------------------------------------------------------------------------- |
+| **added**       | Message {object} | *Emitted when a snackbar message is added to the stack*                   |
+| **removed**     | Message {object} | *Emitted when a snackbar message times out and is removed from the stack* |
+| **dismissed**   | Message {object} | *Emitted when a message is manually dismissed from the stack*             |
+| **cleared**     | *none*           | *Emitted when all messages are cleared from the stack*                    |
