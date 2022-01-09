@@ -93,4 +93,11 @@ export const propsModel = {
 		type: Boolean,
 		default: false,
 	},
+	/**
+	 * Add shadow effect to messages
+	 */
+	shadow: {
+		type: Boolean,
+		default: false,
+	},
 };

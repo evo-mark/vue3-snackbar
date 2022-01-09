@@ -36,6 +36,7 @@ const generatedBaseClasses = $computed(() => {
 		"is-right": props.left === false && props.right,
 		"is-middle": props.top === false && props.bottom === false,
 		"is-centre": props.left === false && props.right === false,
+		"has-shadow": props.shadow,
 	};
 });
 

@@ -121,6 +121,9 @@
 										<Switch v-model:checked="options.dense" label="Dense" />
 									</div>
 									<div class="mb-4">
+										<Switch v-model:checked="options.shadow" label="Enable Message Shadows" />
+									</div>
+									<div class="mb-4">
 										<Switch v-model:checked="options.groups" label="Enable Groups" />
 									</div>
 									<div class="mb-4">
@@ -166,6 +169,7 @@
 			:dense="options.dense"
 			:groups="options.groups"
 			:reverse="options.reverse"
+			:shadow="options.shadow"
 		></vue3-snackbar>
 	</teleport>
 </template>
@@ -204,6 +208,7 @@ const options = reactive({
 	dense: false,
 	groups: false,
 	reverse: false,
+	shadow: false,
 });
 
 const code = computed(() => {
@@ -214,6 +219,7 @@ const code = computed(() => {
 	if (options.right) position.push("right");
 	const other = [];
 	if (options.dense) other.push("dense");
+	if (options.shadow) other.push("shadow");
 	if (options.groups) other.push("groups");
 	return `<vue3-snackbar ${position.join(" ")} :duration="${options.duration}"${
 		other.length > 0 ? " " + other.join(" ") : ""

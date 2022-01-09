@@ -105,14 +105,23 @@ const types = {
 		path: mdiAlertOctagonOutline,
 	},
 };
+
+/**
+ * Return the options passed to the vue3-icon component
+ */
 const icon = $computed(() => {
 	const preset = types[props.message.type];
+	// If a preset is defined
 	if (preset) {
 		preset.type = "mdi";
 		return preset;
-	} else if (props.message.icon && typeof props.message.icon === "object") {
+	}
+	// If the user passes their own icon object
+	else if (props.message.icon && typeof props.message.icon === "object") {
 		return props.message.icon;
-	} else
+	}
+	// Otherwise return an empty icon
+	else
 		return {
 			path: "",
 			type: "default",

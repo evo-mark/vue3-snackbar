@@ -78,6 +78,7 @@ export default {
 | **messageClass**| String  | null      | *Adds a custom class to every message*                                      |
 | **zindex**      | Number  | 10000     | *The z-index setting for the snackbar container*                            |
 | **dense**       | Boolean | false     | *Reduce the y-axis padding around each message*                             |
+| **shadow**      | Boolean | false     | *Add shadows to the displayed messages*                                     |
 | **groups**      | Boolean | false     | *Group messages with the same group-key*                                    |
 | **reverse**     | Boolean | false     | *Reverse the stacking order of snackbar messages*                           |
 ---
