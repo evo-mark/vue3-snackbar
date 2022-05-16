@@ -15,19 +15,19 @@
 		}"
 	>
 		<div class="vue3-snackbar-message-wrapper">
-			<div class="vue3-snackbar-message-icon" v-if="icon">
+			<div v-if="icon" class="vue3-snackbar-message-icon">
 				<vue3-icon v-bind="icon" role="img" />
 			</div>
 			<div class="vue3-snackbar-message-content">
-				<div class="vue3-snackbar-message-badge" v-if="props.message.count > 1">{{ props.message.count }}</div>
+				<div v-if="props.message.count > 1" class="vue3-snackbar-message-badge">{{ props.message.count }}</div>
 				<div class="vue3-snackbar-message-title">{{ props.message.title || props.message.text }}</div>
-				<div class="vue3-snackbar-message-additional" v-if="props.message.title && props.message.text">
+				<div v-if="props.message.title && props.message.text" class="vue3-snackbar-message-additional">
 					{{ props.message.text }}
 				</div>
 			</div>
 			<div class="spacer"></div>
 			<div class="vue3-snackbar-message-close">
-				<button @click="dismissClick" v-if="props.message.dismissible !== false">
+				<button v-if="props.message.dismissible !== false" @click="dismissClick">
 					<vue3-icon type="mdi" :path="mdiClose" />
 				</button>
 			</div>
@@ -39,7 +39,7 @@
 import { mdiCheckCircle, mdiClose, mdiInformationOutline, mdiAlertOctagonOutline, mdiAlertOutline } from "@mdi/js";
 
 import Vue3Icon from "vue3-icon";
-import { computed, onMounted, watch } from "vue";
+import { onMounted, watch } from "vue";
 
 const emit = defineEmits(["dismiss"]);
 const props = defineProps({
@@ -47,8 +47,14 @@ const props = defineProps({
 		type: Object,
 		default: () => ({}),
 	},
-	messageClass: String,
-	dense: Boolean,
+	messageClass: {
+		type: String,
+		default: "",
+	},
+	dense: {
+		type: Boolean,
+		default: false,
+	},
 });
 
 let timeout = null,
@@ -84,38 +90,41 @@ const dismissClick = () => {
 const dismiss = () => {
 	emit("dismiss", props.message);
 };
-const icon = computed(() => {
-	switch (props.message.type) {
-		case "success":
-			return {
-				path: mdiCheckCircle,
-				type: "mdi",
-			};
-		case "info":
-			return {
-				path: mdiInformationOutline,
-				type: "mdi",
-			};
-		case "warning":
-			return {
-				path: mdiAlertOutline,
-				type: "mdi",
-			};
-		case "error":
-			return {
-				path: mdiAlertOctagonOutline,
-				type: "mdi",
-			};
+
+const types = {
+	success: {
+		path: mdiCheckCircle,
+	},
+	info: {
+		path: mdiInformationOutline,
+	},
+	warning: {
+		path: mdiAlertOutline,
+	},
+	error: {
+		path: mdiAlertOctagonOutline,
+	},
+};
+
+/**
+ * Return the options passed to the vue3-icon component
+ */
+const icon = $computed(() => {
+	const preset = types[props.message.type];
+	// If a preset is defined
+	if (preset) {
+		preset.type = "mdi";
+		return preset;
 	}
-	if (
-		!props.message.icon ||
-		typeof props.message.icon !== "object" ||
-		(!props.message.icon.path && !props.message.icon.faIcon)
-	) {
+	// If the user passes their own icon object
+	else if (props.message.icon && typeof props.message.icon === "object") {
+		return props.message.icon;
+	}
+	// Otherwise return an empty icon
+	else
 		return {
 			path: "",
 			type: "default",
 		};
-	} else return props.message.icon || {};
 });
 </script>

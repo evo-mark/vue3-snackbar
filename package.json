@@ -1,86 +1,65 @@
 {
-  "name": "vue3-snackbar",
-  "version": "1.1.1",
-  "author": "Craig Riley",
-  "scripts": {
-    "build": "vite build -c vite-build.config.js",
-    "demo": "vite serve",
-    "demo:build": "vite build",
-    "demo:deploy": "gh-pages -d demo/dist"
-  },
-  "main": "./dist/vue3-snackbar.umd.js",
-  "module": "./dist/vue3-snackbar.es.js",
-  "files": [
-    "dist"
-  ],
-  "dependencies": {
-    "core-js": "^3.6.5",
-    "tiny-emitter": "^2.1.0",
-    "vue3-icon": "^2.0.0"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.14.6",
-    "@mdi/js": "^6.5.95",
-    "@vitejs/plugin-vue": "^2.0.1",
-    "@vuetify/vite-plugin": "^1.0.0-alpha.3",
-    "@vue/compiler-sfc": "^3.0.0",
-    "babel-eslint": "^10.1.0",
-    "babel-loader": "^8.2.2",
-    "eslint": "^8.6.0",
-    "eslint-plugin-vue": "^8.2.0",
-    "gh-pages": "^3.2.3",
-    "postcss": "^8.3.5",
-    "prismjs": "^1.24.1",
-    "roboto-fontface": "*",
-    "sass": "^1.45.2",
-    "sass-loader": "^12.4.0",
-    "vite": "^2.3.7",
-    "vue": "^3.0.0",
-    "vue-cli-plugin-vuetify": "~2.4.1",
-    "vue-loader": "^16.3.0",
-    "vuetify": "^3.0.0-alpha.9",
-    "vuetify-loader": "^2.0.0-alpha.9"
-  },
-  "peerDependencies": {
-    "vue": "^3.0.0"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/vue3-essential",
-      "eslint:recommended"
-    ],
-    "parserOptions": {
-      "parser": "babel-eslint"
-    },
-    "rules": {
-      "no-unused-vars": "off",
-      "no-undef": "off"
-    }
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead"
-  ],
-  "bugs": {
-    "url": "https://github.com/craigrileyuk/vue3-snackbar/issues"
-  },
-  "homepage": "https://github.com/craigrileyuk/vue3-snackbar#readme",
-  "keywords": [
-    "Vue",
-    "Vue3",
-    "snackbar",
-    "toast",
-    "alerts",
-    "messages"
-  ],
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/craigrileyuk/vue3-snackbar.git"
-  }
+	"name": "vue3-snackbar",
+	"version": "1.1.2",
+	"author": "Craig Riley",
+	"scripts": {
+		"build": "vite build -c vite-build.config.js",
+		"demo": "vite serve",
+		"demo:build": "vite build",
+		"demo:deploy": "gh-pages -d demo/dist"
+	},
+	"main": "./dist/vue3-snackbar.umd.js",
+	"module": "./dist/vue3-snackbar.es.js",
+	"files": [
+		"dist"
+	],
+	"dependencies": {
+		"tiny-emitter": "^2.1.0",
+		"vue3-icon": "^2.0.0"
+	},
+	"devDependencies": {
+		"@mdi/js": "^6.5.95",
+		"@vitejs/plugin-vue": "^2.0.1",
+		"@vue/compiler-sfc": "^3.0.0",
+		"@vuetify/vite-plugin": "^1.0.0-alpha.3",
+		"eslint": "^8.6.0",
+		"eslint-config-prettier": "^8.3.0",
+		"eslint-plugin-vue": "^8.2.0",
+		"gh-pages": "^3.2.3",
+		"postcss": "^8.4.5",
+		"prettier": "^2.5.1",
+		"prismjs": "^1.24.1",
+		"roboto-fontface": "*",
+		"sass": "^1.45.2",
+		"sass-loader": "^12.4.0",
+		"vite": "^2.3.7",
+		"vue": "^3.2.25",
+		"vuetify": "^3.0.0-alpha.9",
+		"vuetify-loader": "^2.0.0-alpha.9"
+	},
+	"peerDependencies": {
+		"vue": "^3.0.0"
+	},
+	"browserslist": [
+		"> 1%",
+		"last 2 versions",
+		"not dead"
+	],
+	"bugs": {
+		"url": "https://github.com/craigrileyuk/vue3-snackbar/issues"
+	},
+	"homepage": "https://github.com/craigrileyuk/vue3-snackbar#readme",
+	"keywords": [
+		"Vue",
+		"Vue3",
+		"snackbar",
+		"toast",
+		"alerts",
+		"messages"
+	],
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/craigrileyuk/vue3-snackbar.git"
+	}
 }

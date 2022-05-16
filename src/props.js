@@ -80,9 +80,23 @@ export const propsModel = {
 		default: false,
 	},
 	/**
+	 * Reverse the display order of snackbar messages
+	 */
+	reverse: {
+		type: Boolean,
+		default: false,
+	},
+	/**
 	 * Use snackbar groups with messages with the same group-key
 	 */
 	groups: {
+		type: Boolean,
+		default: false,
+	},
+	/**
+	 * Add shadow effect to messages
+	 */
+	shadow: {
 		type: Boolean,
 		default: false,
 	},
