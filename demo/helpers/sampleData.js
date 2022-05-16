@@ -15,7 +15,7 @@ export default [
 	{
 		type: "info",
 		text: "This message doesn't have a title",
-		duration: 5000,
+		duration: 15000,
 		dismissible: false,
 	},
 	{
