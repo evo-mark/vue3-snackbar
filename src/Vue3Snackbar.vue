@@ -1,21 +1,24 @@
 <template>
-	<section
-		id="vue3-snackbar--container"
-		:class="[generatedBaseClasses]"
-		class="vue3-snackbar"
-		:style="generatedBaseStyles"
-	>
-		<transition-group name="vue3-snackbar-message" tag="div">
-			<SnackbarMessage
-				v-for="message in messages"
-				:key="message.id"
-				:message="message"
-				:message-class="props.messageClass"
-				:dense="props.dense"
-				@dismiss="remove($event, true)"
-			/>
-		</transition-group>
-	</section>
+	<teleport :to="props.attach">
+		<section
+			id="vue3-snackbar--container"
+			:class="[generatedBaseClasses]"
+			class="vue3-snackbar"
+			:style="generatedBaseStyles"
+		>
+			<transition-group name="vue3-snackbar-message" tag="div">
+				<SnackbarMessage
+					v-for="message in messages"
+					:key="message.id"
+					:message="message"
+					:message-class="props.messageClass"
+					:dense="props.dense"
+					:border-class="borderClass"
+					@dismiss="remove($event, true)"
+				/>
+			</transition-group>
+		</section>
+	</teleport>
 </template>
 
 <script setup>
@@ -46,9 +49,11 @@ const generatedBaseStyles = $computed(() => {
 		"--error-colour": props.error,
 		"--warning-colour": props.warning,
 		"--info-colour": props.info,
-		"--snackbar-zindex": props.zindex,
+		"--snackbar-zindex": props.zIndex,
 	};
 });
+
+const borderClass = $computed(() => (props.border ? `border-${props.border}` : ""));
 
 const hashCode = (s) => Math.abs(s.split("").reduce((a, b) => ((a << 5) - a + b.charCodeAt(0)) | 0, 0));
 

@@ -1,3 +1,5 @@
+/* TODO: Implement BEM properly */
+
 #vue3-snackbar--container {
 	position: fixed;
 	margin: 16px 16px 0 16px;
@@ -44,23 +46,70 @@
 	border-radius: 4px;
 	pointer-events: all;
 
-	&.success:not(.has-background) {
+	&.has-border {
+		position: relative;
+		background-color: #fff;
+		border-style: solid;
+		border-color: currentColor;
+		border-width: 0;
+		&::before {
+			border-radius: inherit;
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			content: "";
+			background-color: currentColor;
+			opacity: 0.12;
+		}
+		&.success {
+			color: var(--success-colour);
+		}
+		&.error {
+			color: var(--error-colour);
+		}
+		&.info {
+			color: var(--info-colour);
+		}
+		&.warning {
+			color: var(--warning-colour);
+		}
+		&.has-background {
+			color: var(--message-background);
+		}
+	}
+
+	&.border-left {
+		border-left-width: 8px;
+	}
+	&.border-right {
+		border-right-width: 8px;
+	}
+	&.border-top {
+		border-top-width: 8px;
+	}
+	&.border-bottom {
+		border-bottom-width: 8px;
+	}
+
+	&.success:not(.has-background):not(.has-border) {
 		background-color: var(--success-colour);
 		border-color: var(--success-colour);
 	}
-	&.error:not(.has-background) {
+	&.error:not(.has-background):not(.has-border) {
 		background-color: var(--error-colour);
 		border-color: var(--error-colour);
 	}
-	&.warning:not(.has-background) {
+	&.warning:not(.has-background):not(.has-border) {
 		background-color: var(--warning-colour);
 		border-color: var(--warning-colour);
 	}
-	&.info:not(.has-background) {
+	&.info:not(.has-background):not(.has-border) {
 		background-color: var(--info-colour);
 		border-color: var(--info-colour);
 	}
-	&.has-background {
+	&.has-background:not(.has-border) {
 		background-color: var(--message-background);
 		border-color: var(--message-background);
 	}
@@ -155,6 +204,11 @@
 		top: 0;
 		left: 0;
 		transform: translate(-25%, -25%);
+	}
+
+	&.border-left .vue3-snackbar-message-badge {
+		left: 16px;
+		top: -5px;
 	}
 }
 

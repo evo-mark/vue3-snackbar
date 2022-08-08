@@ -4,8 +4,10 @@
 		:class="[
 			props.message.type,
 			props.messageClass,
+			props.borderClass,
 			{
 				'has-background': props.message.background,
+				'has-border': props.borderClass,
 				'is-dense': props.dense,
 				'shake-baby-shake': hasShake,
 			},
@@ -43,6 +45,10 @@ import { onMounted, watch } from "vue";
 
 const emit = defineEmits(["dismiss"]);
 const props = defineProps({
+	borderClass: {
+		type: String,
+		default: "",
+	},
 	message: {
 		type: Object,
 		default: () => ({}),

@@ -13,46 +13,7 @@
 								snackbar/toast messaging hub.
 							</h2>
 
-							<v-list>
-								<v-list-item>
-									<v-list-item-avatar class="d-flex align-center">
-										<v-icon :icon="mdiStackExchange" />
-									</v-list-item-avatar>
-									<v-list-item-title>Automatically stacks new messages.</v-list-item-title>
-								</v-list-item>
-								<v-list-item>
-									<v-list-item-avatar class="d-flex align-center">
-										<v-icon :icon="mdiCompass" />
-									</v-list-item-avatar>
-									<v-list-item-title
-										>Choose from nine different locations for your hub.</v-list-item-title
-									>
-								</v-list-item>
-								<v-list-item>
-									<v-list-item-avatar class="d-flex align-center">
-										<v-icon :icon="mdiTimerSand" />
-									</v-list-item-avatar>
-									<v-list-item-title
-										>Set messages to disappear automatically, or manually.</v-list-item-title
-									>
-								</v-list-item>
-								<v-list-item>
-									<v-list-item-avatar class="d-flex align-center">
-										<v-icon :icon="mdiConnection" />
-									</v-list-item-avatar>
-									<v-list-item-title
-										>Fully compatible with the Composition API and Options API.</v-list-item-title
-									>
-								</v-list-item>
-								<v-list-item>
-									<v-list-item-avatar class="d-flex align-center">
-										<v-icon :icon="mdiPaletteAdvanced" />
-									</v-list-item-avatar>
-									<v-list-item-title
-										>Customise the appearance and behaviour of your messages.</v-list-item-title
-									>
-								</v-list-item>
-							</v-list>
+							<v-list :items="featureList" />
 						</v-col>
 						<v-col cols="12" md="6" class="d-flex justify-end">
 							<v-img :src="ExampleImage" class="example-image" />
@@ -115,6 +76,17 @@
 								<div class="text-overline">Messages</div>
 								<div class="px-8">
 									<div class="mb-4">
+										<v-select
+											v-model="options.border"
+											:items="borderOptions"
+											label="Border Style"
+											clearable
+											hide-details
+											variant="outlined"
+											density="comfortable"
+										/>
+									</div>
+									<div class="mb-4">
 										<TextInput v-model="options.duration" label="Duration" />
 									</div>
 									<div class="mb-4">
@@ -159,19 +131,18 @@
 			>
 		</v-footer>
 	</v-app>
-	<teleport to="body">
-		<vue3-snackbar
-			:top="options.top"
-			:bottom="options.bottom"
-			:left="options.left"
-			:right="options.right"
-			:duration="options.duration"
-			:dense="options.dense"
-			:groups="options.groups"
-			:reverse="options.reverse"
-			:shadow="options.shadow"
-		></vue3-snackbar>
-	</teleport>
+	<vue3-snackbar
+		:top="options.top"
+		:bottom="options.bottom"
+		:left="options.left"
+		:right="options.right"
+		:duration="options.duration"
+		:dense="options.dense"
+		:groups="options.groups"
+		:reverse="options.reverse"
+		:shadow="options.shadow"
+		:border="options.border"
+	/>
 </template>
 
 <script setup>
@@ -209,6 +180,7 @@ const options = reactive({
 	groups: false,
 	reverse: false,
 	shadow: false,
+	border: "",
 });
 
 const code = computed(() => {
@@ -218,6 +190,7 @@ const code = computed(() => {
 	if (options.left) position.push("left");
 	if (options.right) position.push("right");
 	const other = [];
+	if (options.border) other.push(`border="${options.border}"`);
 	if (options.dense) other.push("dense");
 	if (options.shadow) other.push("shadow");
 	if (options.groups) other.push("groups");
@@ -231,6 +204,33 @@ const snackbar = useSnackbar();
 const addRandomMessage = () => {
 	snackbar.add(sampleMessages[Math.floor(Math.random() * sampleMessages.length)]);
 };
+
+const featureList = [
+	{ title: "Automatically stacks new messages.", props: { prependIcon: mdiStackExchange } },
+	{ title: "Choose from nine different locations for your hub.", props: { prependIcon: mdiCompass } },
+	{ title: "Set messages to disappear automatically, or manually.", props: { prependIcon: mdiTimerSand } },
+	{ title: "Fully compatible with the Composition API and Options API.", props: { prependIcon: mdiConnection } },
+	{ title: "Customise the appearance and behaviour of your messages.", props: { prependIcon: mdiPaletteAdvanced } },
+];
+
+const borderOptions = [
+	{
+		value: "left",
+		title: "Left Border",
+	},
+	{
+		value: "right",
+		title: "Right Border",
+	},
+	{
+		value: "top",
+		title: "Top Border",
+	},
+	{
+		value: "bottom",
+		title: "Bottom Border",
+	},
+];
 </script>
 
 <style lang="scss" scoped>

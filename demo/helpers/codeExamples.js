@@ -1,7 +1,7 @@
 export const mainJs = `// main.js
 import { createApp } from "vue";
 import { SnackbarService, Vue3Snackbar } from "vue3-snackbar";
-import "vue3-snackbar/dist/style.css";
+import "vue3-snackbar/styles";
 import App from "./App.vue";
 const app = createApp(App);
 app.use(SnackbarService);
@@ -10,10 +10,7 @@ app.mount("#app");`;
 
 export const appTemplate = `<!-- App.vue -->
 <template>
-<!-- While teleporting the snackbar isn't required, it can help resolve z-index issues -->
-<teleport to="body">
     <vue3-snackbar bottom right :duration="4000"></vue3-snackbar>
-</teleport>
 </template>`;
 
 export const appScriptOptions = `// App.vue - Options API

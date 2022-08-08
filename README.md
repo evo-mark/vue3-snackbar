@@ -1,8 +1,18 @@
 # Vue 3 Snackbar
 
+[![NPM Version](https://img.shields.io/npm/v/vue3-snackbar.svg?style=flat-square)](https://www.npmjs.com/package/vue3-snackbar)
+[![Licence: MIT](https://img.shields.io/badge/License-MIT-red.svg?style=flat-square)](LICENCE)
+[![NPM Downloads](https://img.shields.io/npm/dt/vue3-snackbar.svg?style=flat-square)](https://www.npmjs.com/package/vue3-snackbar)
+
 Add a snackbar/toast service to your Vue 3 application and easily alert users about app processes.
 
 **[Demo Site](https://craigrileyuk.github.io/vue3-snackbar/)**
+
+## Migrating to v2
+
+- Prop `zindex` was renamed to `zIndex`, you should switch to passing `<vue3-snackbar :z-index="99">` now if required.
+- Styles are now exposed via exports, import path should be changed to `import "vue3-snackbar/styles";`.
+- Wrapping `<teleport>` around the component is no longer required. It will now teleport to the end of the `<body>` section by default. This can be overriden via the new `attach` prop.
 
 ## Installation
 
@@ -96,7 +106,7 @@ Adds a new snackbar message to the stack
 | **text**        | String  | ""          | *The body of the message*                                                   |
 | **dismissible** | Boolean | true        | *Allow the user to manually dismiss the message via a close button*         |
 | **icon**        | Object  | {}          | *Manually set the icon for the message (see below)*                         |
-| **groupKey**    | String  | (see desc.) | *Message group key (for when groups are enabled). Defaults to a string hash based on type, title and text*                           |
+| **groupKey**    | String  | (see desc.) | *Message group key (for when groups are enabled). Defaults to a string hash based on type, title and text* |
 
 > Type: success, error, warning, info
 

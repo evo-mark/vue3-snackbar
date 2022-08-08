@@ -53,6 +53,21 @@ export const propsModel = {
 	 * OTHER PROPS
 	 ****************************************** */
 	/**
+	 * The element to teleport the snackbar container to
+	 */
+	attach: {
+		type: [String, HTMLElement],
+		default: "body",
+	},
+	/**
+	 * Use the alternate border style for messages
+	 */
+	border: {
+		type: String,
+		default: "",
+		validator: (v) => ["top", "bottom", "left", "right", ""].includes(v),
+	},
+	/**
 	 * The default time in ms for messages to stay on the screen
 	 */
 	duration: {
@@ -68,7 +83,7 @@ export const propsModel = {
 	/**
 	 * The z-index value of the snackbar container
 	 */
-	zindex: {
+	zIndex: {
 		type: Number,
 		default: 10000,
 	},
