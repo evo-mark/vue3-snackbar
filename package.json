@@ -12,8 +12,9 @@
 	"module": "./dist/vue3-snackbar.es.js",
 	"exports": {
 		".": {
-			"import": "./dist/vue3-snackbar.es.js",
-			"require": "./dist/vue3-snackbar.cjs.js"
+			"import": "./dist/vue3-snackbar.mjs",
+			"require": "./dist/vue3-snackbar.js",
+			"browser": "./dist/vue3-snackbar.umd.js"
 		},
 		"./styles": "./dist/style.css"
 	},
