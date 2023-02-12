@@ -1,8 +1,6 @@
 import "vuetify/styles";
 import { createVuetify } from "vuetify";
 import { aliases, mdi } from "vuetify/lib/iconsets/mdi-svg";
-// import * as components from "./components";
-// import * as directives from "vuetify/lib/directives";
 
 const vueLightTheme = {
 	dark: false,
@@ -15,8 +13,6 @@ const vueLightTheme = {
 };
 
 export default createVuetify({
-	// components,
-	//	directives,
 	icons: {
 		defaultSet: "mdi",
 		aliases,

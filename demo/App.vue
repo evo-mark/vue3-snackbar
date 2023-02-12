@@ -52,66 +52,113 @@
 			<v-container fluid class="bg-accent my-16" elevation="0">
 				<h3 class="text-center text-uppercase text-bold" style="width: 100%">Sandbox</h3>
 			</v-container>
-			<v-container style="max-width: 1100px">
+			<v-container>
 				<v-row>
-					<v-col cols="6">
-						<div style="max-width: 400px" class="mr-auto">
-							<v-card class="d-flex flex-column pa-6">
+					<v-col cols="8">
+						<div class="mr-auto">
+							<v-card class="d-flex flex-column pa-6" :elevation="4">
 								<h4 class="mb-4">Component Properties</h4>
-								<div class="text-overline">Position</div>
-								<div class="px-8">
-									<div class="mb-4">
-										<Switch v-model:checked="options.top" label="Top" />
-									</div>
-									<div class="mb-4">
-										<Switch v-model:checked="options.bottom" label="Bottom" />
-									</div>
-									<div class="mb-4">
-										<Switch v-model:checked="options.left" label="Left" />
-									</div>
-									<div class="mb-4">
-										<Switch v-model:checked="options.right" label="Right" />
-									</div>
-								</div>
-								<div class="text-overline">Messages</div>
-								<div class="px-8">
-									<div class="mb-4">
-										<v-select
-											v-model="options.border"
-											:items="borderOptions"
-											label="Border Style"
-											clearable
-											hide-details
-											variant="outlined"
-											density="comfortable"
-										/>
-									</div>
-									<div class="mb-4">
-										<TextInput v-model="options.duration" label="Duration" />
-									</div>
-									<div class="mb-4">
-										<Switch v-model:checked="options.dense" label="Dense" />
-									</div>
-									<div class="mb-4">
-										<Switch v-model:checked="options.shadow" label="Enable Message Shadows" />
-									</div>
-									<div class="mb-4">
-										<Switch v-model:checked="options.groups" label="Enable Groups" />
-									</div>
-									<div class="mb-4">
-										<Switch v-model:checked="options.reverse" label="Reverse Stack Order" />
-									</div>
-								</div>
-								<div class="mb-4">
-									<v-btn @click="addRandomMessage" color="secondary" block>Add Message</v-btn>
-								</div>
-								<div class="mb-4">
-									<v-btn @click="snackbar.clear()" color="accent" block>Clear All Messages</v-btn>
-								</div>
+
+								<v-row>
+									<v-col cols="6">
+										<div class="text-overline mb-2">Messages</div>
+										<div class="px-8">
+											<div class="my-4">
+												<v-text-field v-model="options.duration" label="Duration" />
+											</div>
+											<div class="mb-4">
+												<Switch v-model:checked="options.dense" label="Dense" />
+											</div>
+											<div class="mb-4">
+												<Switch
+													v-model:checked="options.shadow"
+													label="Enable Message Shadows"
+												/>
+											</div>
+											<div class="mb-4">
+												<Switch v-model:checked="options.groups" label="Enable Groups" />
+											</div>
+											<div class="mb-4">
+												<Switch v-model:checked="options.reverse" label="Reverse Stack Order" />
+											</div>
+										</div>
+									</v-col>
+									<v-col cols="6">
+										<div class="text-overline mb-2">Border-Style Messages</div>
+										<div class="px-8">
+											<div class="mb-4">
+												<v-select
+													v-model="options.border"
+													:items="borderOptions"
+													label="Border Style"
+													clearable
+													hide-details
+												/>
+											</div>
+											<div class="mb-4">
+												<v-text-field
+													v-model="options.baseBackgroundColor"
+													label="Base Background Colour"
+													:disabled="!options.border"
+													hide-details
+												/>
+											</div>
+											<div class="mb-4">
+												<v-text-field
+													v-model="options.backgroundColor"
+													label="Background Colour"
+													:disabled="!options.border"
+													hide-details
+												/>
+											</div>
+											<div class="mb-4">
+												Background Opacity
+												<v-slider
+													v-model="options.backgroundOpacity"
+													thumb-label
+													:min="0"
+													:max="1"
+													:step="0.01"
+													:disabled="!options.border"
+													hide-details
+												></v-slider>
+											</div>
+										</div>
+									</v-col>
+									<v-col cols="6">
+										<div class="text-overline">Position</div>
+										<div class="px-8">
+											<div class="mb-4">
+												<Switch v-model:checked="options.top" label="Top" />
+											</div>
+											<div class="mb-4">
+												<Switch v-model:checked="options.bottom" label="Bottom" />
+											</div>
+											<div class="mb-4">
+												<Switch v-model:checked="options.left" label="Left" />
+											</div>
+											<div class="mb-4">
+												<Switch v-model:checked="options.right" label="Right" />
+											</div>
+										</div>
+									</v-col>
+									<v-col cols="6" align-self="end">
+										<div class="text-overline mb-2">Actions</div>
+
+										<div class="mb-4">
+											<v-btn @click="addRandomMessage" color="secondary" block>Add Message</v-btn>
+										</div>
+										<div class="mb-4">
+											<v-btn @click="snackbar.clear()" color="accent" block
+												>Clear All Messages</v-btn
+											>
+										</div>
+									</v-col>
+								</v-row>
 							</v-card>
 						</div>
 					</v-col>
-					<v-col cols="6" class="d-flex flex-column">
+					<v-col cols="4" class="d-flex flex-column">
 						<h5>Component Code</h5>
 						<code class="align-self-center">
 							<pre v-text="code"></pre>
@@ -142,6 +189,9 @@
 		:reverse="options.reverse"
 		:shadow="options.shadow"
 		:border="options.border"
+		:background-opacity="options.backgroundOpacity"
+		:background-color="options.backgroundColor"
+		:base-background-color="options.baseBackgroundColor"
 	/>
 </template>
 
@@ -181,6 +231,9 @@ const options = reactive({
 	reverse: false,
 	shadow: false,
 	border: "",
+	backgroundOpacity: 0.12,
+	backgroundColor: "currentColor",
+	baseBackgroundColor: "#fff",
 });
 
 const code = computed(() => {
@@ -214,6 +267,10 @@ const featureList = [
 ];
 
 const borderOptions = [
+	{
+		value: "",
+		title: "No Border",
+	},
 	{
 		value: "left",
 		title: "Left Border",

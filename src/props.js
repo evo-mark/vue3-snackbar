@@ -68,6 +68,30 @@ export const propsModel = {
 		validator: (v) => ["top", "bottom", "left", "right", ""].includes(v),
 	},
 	/**
+	 * The background colour opacity when using border-style messages
+	 */
+	backgroundOpacity: {
+		type: [String, Number],
+		default: 0.12,
+		validator: (v) => {
+			return !isNaN(parseFloat(v)) && isFinite(v);
+		},
+	},
+	/**
+	 * Background colour when using border-style messages
+	 */
+	backgroundColor: {
+		type: String,
+		default: "currentColor",
+	},
+	/**
+	 * Background colour when using border-style messages
+	 */
+	baseBackgroundColor: {
+		type: String,
+		default: "#fff",
+	},
+	/**
 	 * The default time in ms for messages to stay on the screen
 	 */
 	duration: {

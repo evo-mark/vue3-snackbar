@@ -3,7 +3,10 @@ import { h } from "vue";
 
 export default {
 	props: {
-		code: String,
+		code: {
+			type: String,
+			default: "",
+		},
 		inline: {
 			type: Boolean,
 			default: false,
@@ -14,11 +17,7 @@ export default {
 		},
 	},
 	setup(props, context) {
-		const code =
-			props.code ||
-			(context.children && context.children.length > 0
-				? context.children[0].text
-				: "");
+		const code = props.code || (context.children && context.children.length > 0 ? context.children[0].text : "");
 		const language = props.language;
 		const prismLanguage = Prism.languages[language];
 		const className = `language-${language}`;

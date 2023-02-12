@@ -4,7 +4,7 @@
 	"author": "Craig Riley",
 	"scripts": {
 		"build": "vite build -c vite-build.config.js",
-		"demo": "vite serve",
+		"demo": "vite",
 		"demo:build": "vite build",
 		"demo:deploy": "gh-pages -d demo/dist"
 	},
@@ -22,13 +22,13 @@
 	],
 	"dependencies": {
 		"tiny-emitter": "^2.1.0",
+		"vite-plugin-vuetify": "^1.0.2",
 		"vue3-icon": "^2.0.0"
 	},
 	"devDependencies": {
 		"@mdi/js": "^7.0.96",
-		"@vitejs/plugin-vue": "^2.0.1",
+		"@vitejs/plugin-vue": "^4.0.0",
 		"@vue/compiler-sfc": "^3.0.0",
-		"@vuetify/vite-plugin": "^1.0.0-alpha.3",
 		"eslint": "^8.6.0",
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-vue": "^9.3.0",
@@ -39,7 +39,7 @@
 		"roboto-fontface": "*",
 		"sass": "^1.45.2",
 		"sass-loader": "^13.0.2",
-		"vite": "^2.9.14",
+		"vite": "^4.1.1",
 		"vue": "^3.2.25",
 		"vuetify": "^3.0.0-alpha.9",
 		"vuetify-loader": "^2.0.0-alpha.9"

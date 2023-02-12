@@ -1,5 +1,3 @@
-/* TODO: Implement BEM properly */
-
 #vue3-snackbar--container {
 	position: fixed;
 	margin: 16px 16px 0 16px;
@@ -48,7 +46,7 @@
 
 	&.has-border {
 		position: relative;
-		background-color: #fff;
+		background-color: var(--base-background-color, #fff);
 		border-style: solid;
 		border-color: currentColor;
 		border-width: 0;
@@ -60,8 +58,8 @@
 			left: 0;
 			right: 0;
 			content: "";
-			background-color: currentColor;
-			opacity: 0.12;
+			background-color: var(--background-color);
+			opacity: var(--background-opacity);
 		}
 		&.success {
 			color: var(--success-colour);
@@ -127,6 +125,11 @@
 
 	&-title {
 		font-weight: bold;
+		position: relative;
+	}
+
+	&-additional {
+		position: relative;
 	}
 
 	&-icon {
@@ -207,7 +210,7 @@
 	}
 
 	&.border-left .vue3-snackbar-message-badge {
-		left: 16px;
+		left: 0;
 		top: -5px;
 	}
 }

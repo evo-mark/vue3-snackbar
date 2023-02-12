@@ -2,7 +2,7 @@
 	<article
 		class="vue3-snackbar-message"
 		:class="[
-			props.message.type,
+			props.message.type || 'custom',
 			props.messageClass,
 			props.borderClass,
 			{
@@ -16,24 +16,43 @@
 			'--message-background': props.message.background,
 		}"
 	>
-		<div class="vue3-snackbar-message-wrapper">
-			<div v-if="icon" class="vue3-snackbar-message-icon">
-				<vue3-icon v-bind="icon" role="img" />
-			</div>
-			<div class="vue3-snackbar-message-content">
-				<div v-if="props.message.count > 1" class="vue3-snackbar-message-badge">{{ props.message.count }}</div>
-				<div class="vue3-snackbar-message-title">{{ props.message.title || props.message.text }}</div>
-				<div v-if="props.message.title && props.message.text" class="vue3-snackbar-message-additional">
-					{{ props.message.text }}
+		<slot name="message-inner" :message="props.message">
+			<div class="vue3-snackbar-message-wrapper">
+				<div v-if="icon" class="vue3-snackbar-message-icon">
+					<slot name="message-icon" :message="props.message" :icon="icon">
+						<vue3-icon v-bind="icon" role="img" />
+					</slot>
+				</div>
+				<div class="vue3-snackbar-message-content">
+					<slot name="message-badge" :message="props.message" :count="props.message.count">
+						<div v-if="props.message.count > 1" class="vue3-snackbar-message-badge">
+							{{ props.message.count }}
+						</div>
+					</slot>
+					<slot
+						name="message-content"
+						:message="props.message"
+						:title="props.message.title"
+						:text="props.message.text"
+					>
+						<div class="vue3-snackbar-message-title">
+							{{ props.message.title || props.message.text }}
+						</div>
+						<div v-if="props.message.title && props.message.text" class="vue3-snackbar-message-additional">
+							{{ props.message.text }}
+						</div>
+					</slot>
+				</div>
+				<div class="spacer"></div>
+				<div class="vue3-snackbar-message-close">
+					<button v-if="props.message.dismissible !== false" @click="dismissClick">
+						<slot name="message-close-icon" :message="props.message">
+							<vue3-icon type="mdi" :path="mdiClose" />
+						</slot>
+					</button>
 				</div>
 			</div>
-			<div class="spacer"></div>
-			<div class="vue3-snackbar-message-close">
-				<button v-if="props.message.dismissible !== false" @click="dismissClick">
-					<vue3-icon type="mdi" :path="mdiClose" />
-				</button>
-			</div>
-		</div>
+		</slot>
 	</article>
 </template>
 
@@ -41,7 +60,7 @@
 import { mdiCheckCircle, mdiClose, mdiInformationOutline, mdiAlertOctagonOutline, mdiAlertOutline } from "@mdi/js";
 
 import Vue3Icon from "vue3-icon";
-import { onMounted, watch } from "vue";
+import { onMounted, watch, ref, computed } from "vue";
 
 const emit = defineEmits(["dismiss"]);
 const props = defineProps({
@@ -66,7 +85,7 @@ const props = defineProps({
 let timeout = null,
 	shakeTimeout = null;
 
-let hasShake = $ref(false);
+let hasShake = ref(false);
 
 const setMessageTimeout = () => {
 	const messageDuration = !props.message.duration && !props.message.dismissible ? 4000 : props.message.duration;
@@ -83,9 +102,9 @@ watch(
 		clearTimeout(timeout);
 		clearTimeout(shakeTimeout);
 		shakeTimeout = setTimeout(() => {
-			hasShake = false;
+			hasShake.value = false;
 		}, 1000);
-		hasShake = true;
+		hasShake.value = true;
 		setMessageTimeout();
 	}
 );
@@ -115,7 +134,7 @@ const types = {
 /**
  * Return the options passed to the vue3-icon component
  */
-const icon = $computed(() => {
+const icon = computed(() => {
 	const preset = types[props.message.type];
 	// If a preset is defined
 	if (preset) {

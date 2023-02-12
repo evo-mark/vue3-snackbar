@@ -15,7 +15,11 @@
 					:dense="props.dense"
 					:border-class="borderClass"
 					@dismiss="remove($event, true)"
-				/>
+				>
+					<template v-for="(_, name) in $slots" v-slot:[name]="slotData">
+						<slot :name="name" v-bind="slotData" />
+					</template>
+				</SnackbarMessage>
 			</transition-group>
 		</section>
 	</teleport>
@@ -23,7 +27,7 @@
 
 <script setup>
 import SnackbarMessage from "./Vue3SnackbarMessage.vue";
-import { onMounted, onUnmounted } from "vue";
+import { onMounted, onUnmounted, computed } from "vue";
 import { propsModel } from "./props.js";
 import { messages } from "./service.js";
 import EventBus from "./eventbus";
@@ -31,7 +35,7 @@ import EventBus from "./eventbus";
 const props = defineProps({ ...propsModel });
 const emit = defineEmits(["added", "dismissed", "removed", "cleared"]);
 
-const generatedBaseClasses = $computed(() => {
+const generatedBaseClasses = computed(() => {
 	return {
 		"is-top": props.top,
 		"is-bottom": props.top === false && props.bottom,
@@ -43,17 +47,20 @@ const generatedBaseClasses = $computed(() => {
 	};
 });
 
-const generatedBaseStyles = $computed(() => {
+const generatedBaseStyles = computed(() => {
 	return {
 		"--success-colour": props.success,
 		"--error-colour": props.error,
 		"--warning-colour": props.warning,
 		"--info-colour": props.info,
 		"--snackbar-zindex": props.zIndex,
+		"--background-opacity": props.backgroundOpacity,
+		"--background-color": props.backgroundColor,
+		"--base-background-color": props.baseBackgroundColor,
 	};
 });
 
-const borderClass = $computed(() => (props.border ? `border-${props.border}` : ""));
+const borderClass = computed(() => (props.border ? `border-${props.border}` : ""));
 
 const hashCode = (s) => Math.abs(s.split("").reduce((a, b) => ((a << 5) - a + b.charCodeAt(0)) | 0, 0));
 
