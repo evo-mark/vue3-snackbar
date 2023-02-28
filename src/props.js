@@ -1,4 +1,4 @@
-const HTMLElementShim = typeof window !== undefined ? HTMLElement : Object;
+const HTMLElementShim = typeof window !== "undefined" ? HTMLElement : Object;
 
 export const propsModel = {
 	/* ******************************************
