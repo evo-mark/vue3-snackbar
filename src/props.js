@@ -1,3 +1,5 @@
+const HTMLElementShim = typeof window !== undefined ? HTMLElement : Object;
+
 export const propsModel = {
 	/* ******************************************
 	 * LOCATION PROPS
@@ -56,7 +58,7 @@ export const propsModel = {
 	 * The element to teleport the snackbar container to
 	 */
 	attach: {
-		type: [String, HTMLElement],
+		type: [String, HTMLElementShim],
 		default: "body",
 	},
 	/**

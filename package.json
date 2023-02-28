@@ -6,7 +6,8 @@
 		"build": "vite build -c vite-build.config.js",
 		"demo": "vite",
 		"demo:build": "vite build",
-		"demo:deploy": "gh-pages -d demo/dist"
+		"demo:deploy": "gh-pages -d demo/dist",
+		"prepublishOnly": "npm run build"
 	},
 	"main": "./dist/vue3-snackbar.cjs.js",
 	"module": "./dist/vue3-snackbar.es.js",
