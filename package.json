@@ -9,12 +9,13 @@
 		"demo:deploy": "gh-pages -d demo/dist",
 		"prepublishOnly": "npm run build"
 	},
-	"main": "./dist/vue3-snackbar.cjs.js",
-	"module": "./dist/vue3-snackbar.es.js",
+	"type": "module",
+	"main": "./dist/vue3-snackbar.js",
+	"module": "./dist/vue3-snackbar.mjs",
 	"exports": {
 		".": {
-			"import": "./dist/vue3-snackbar.mjs",
 			"require": "./dist/vue3-snackbar.js",
+			"import": "./dist/vue3-snackbar.mjs",
 			"browser": "./dist/vue3-snackbar.umd.js"
 		},
 		"./styles": "./dist/style.css"
