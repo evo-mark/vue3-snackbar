@@ -10,13 +10,13 @@
 		"prepublishOnly": "npm run build"
 	},
 	"type": "module",
-	"main": "./dist/vue3-snackbar.js",
-	"module": "./dist/vue3-snackbar.mjs",
+	"main": "./dist/vue3-snackbar.cjs",
+	"module": "./dist/vue3-snackbar.js",
 	"exports": {
 		".": {
-			"require": "./dist/vue3-snackbar.js",
-			"import": "./dist/vue3-snackbar.mjs",
-			"browser": "./dist/vue3-snackbar.umd.js"
+			"require": "./dist/vue3-snackbar.cjs",
+			"import": "./dist/vue3-snackbar.js",
+			"browser": "./dist/vue3-snackbar.umd.cjs"
 		},
 		"./styles": "./dist/style.css"
 	},
