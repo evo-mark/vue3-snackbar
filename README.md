@@ -7,9 +7,9 @@
 </a>
 
 <p align="center">
-  <img src="https://img.shields.io/npm/dm/vite-plugin-gutenberg-blocks.svg" alt="Downloads"></a>
-  <a href="https://www.npmjs.com/package/vite-plugin-gutenberg-blocks"><img src="https://img.shields.io/npm/v/vite-plugin-gutenberg-blocks.svg" alt="Version"></a>
-  <a href="https://github.com/craigrileyuk/vite-plugin-gutenberg-blocks/blob/main/LICENSE"><img src="https://img.shields.io/npm/l/vite-plugin-gutenberg-blocks.svg" alt="License"></a>
+  <img src="https://img.shields.io/npm/dm/vue3-snackbar.svg" alt="Downloads"></a>
+  <a href="https://www.npmjs.com/package/vue3-snackbar"><img src="https://img.shields.io/npm/v/vue3-snackbar.svg" alt="Version"></a>
+  <a href="https://github.com/southcoastweb/vue3-snackbar/blob/main/LICENSE"><img src="https://img.shields.io/npm/l/vue3-snackbar.svg" alt="License"></a>
 </p>
 
 # Vue 3 Snackbar
