@@ -5,7 +5,7 @@ export default {
 	plugins: [vue()],
 	build: {
 		lib: {
-			entry: path.resolve(__dirname, "src/index.js"),
+			entry: path.resolve("./src/index.js"),
 			name: "Vue3Snackbar",
 			formats: ["es", "umd", "cjs", "iife"],
 		},

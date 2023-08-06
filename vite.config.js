@@ -5,5 +5,5 @@ export default {
 	root: "demo",
 	base: "/vue3-snackbar/",
 	assetsDir: "",
-	plugins: [vue({ reactivityTransform: true }), vuetify({ autoImport: true })],
+	plugins: [vue(), vuetify({ autoImport: true })],
 };

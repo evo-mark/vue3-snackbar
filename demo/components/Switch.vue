@@ -12,21 +12,22 @@
     </label>
 </template>
 
-<script>
-export default {
-    name: "Switch",
+<script setup>
+defineOptions({
     inheritAttrs: false,
-    props: {
-        label: {
-            type: String,
-            required: true,
-        },
-        checked: {
-            type: Boolean,
-            required: true,
-        },
+    name: "Switch"
+})
+defineProps({
+    label: {
+        type: String,
+        required: true,
     },
-};
+    checked: {
+        type: Boolean,
+        required: true,
+    },
+
+})
 </script>
 
 <style lang="scss" scoped>

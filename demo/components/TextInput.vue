@@ -5,30 +5,28 @@
 			:name="name"
 			type="text"
 			:value="modelValue"
-			@input="$emit('update:modelValue', parseFloat($event.target.value))"
+			@input="emit('update:modelValue', parseFloat($event.target.value))"
 		/>
 	</div>
 </template>
 
-<script>
-export default {
-	emit: ["update:modelValue"],
-	props: {
-		modelValue: {
-			type: [String, Number],
-			default: "",
-		},
-		label: {
-			type: String,
-			default: "",
-		},
-		name: {
-			type: String,
-			default: "text",
-		},
-	},
-	emit: ["update:modelValue"],
-};
+<script setup>
+const emit = defineEmits(["update:modelValue"]);
+defineProps({
+    modelValue: {
+        type: [String, Number],
+        default: "",
+    },
+    label: {
+        type: String,
+        default: "",
+    },
+    name: {
+        type: String,
+        default: "text",
+    },
+
+})
 </script>
 
 <style lang="scss" scoped>

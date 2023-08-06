@@ -198,7 +198,7 @@
 <script setup>
 import PrismCode from "./components/PrismCode";
 import ExampleImage from "./assets/images/example.png";
-import { reactive, computed, watch } from "vue";
+import { reactive, computed, watch, ref } from "vue";
 import Switch from "./components/Switch.vue";
 import TextInput from "./components/TextInput.vue";
 import headerPartial from "./partials/header.vue";
@@ -208,14 +208,14 @@ import sampleMessages from "./helpers/sampleData";
 
 import { mainJs, appTemplate, appScriptOptions, appScriptComposition } from "./helpers/codeExamples";
 
-let lastMessage = $ref(null);
+let lastMessage = ref(null);
 
 watch(
 	() => [...SnackbarMessages.value],
 	(v) => {
-		if (v[0]) lastMessage = JSON.parse(JSON.stringify(v[v.length - 1]));
-		if (lastMessage && lastMessage.id) {
-			delete lastMessage.id;
+		if (v[0]) lastMessage.value = JSON.parse(JSON.stringify(v[v.length - 1]));
+		if (lastMessage.value && lastMessage.value.id) {
+			delete lastMessage.value.id;
 		}
 	}
 );

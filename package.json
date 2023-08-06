@@ -1,13 +1,14 @@
 {
 	"name": "vue3-snackbar",
-	"version": "2.1.5",
+	"version": "2.1.7",
 	"author": "Craig Riley",
 	"scripts": {
 		"build": "vite build -c vite-build.config.js",
 		"demo": "vite",
 		"demo:build": "vite build",
 		"demo:deploy": "gh-pages -d demo/dist",
-		"prepublishOnly": "npm run build"
+		"prepublishOnly": "npm run build",
+		"preinstall": "npx only-allow pnpm"
 	},
 	"type": "module",
 	"main": "./dist/vue3-snackbar.cjs",
@@ -25,27 +26,25 @@
 	],
 	"dependencies": {
 		"tiny-emitter": "^2.1.0",
-		"vite-plugin-vuetify": "^1.0.2",
-		"vue3-icon": "^2.0.0"
+		"vue3-icon": "^2.1.0"
 	},
 	"devDependencies": {
-		"@mdi/js": "^7.0.96",
-		"@vitejs/plugin-vue": "^4.0.0",
-		"@vue/compiler-sfc": "^3.0.0",
-		"eslint": "^8.6.0",
-		"eslint-config-prettier": "^8.3.0",
-		"eslint-plugin-vue": "^9.3.0",
+		"@mdi/js": "^7.2.96",
+		"@vitejs/plugin-vue": "^4.2.3",
+		"eslint": "^8.46.0",
+		"eslint-config-prettier": "^9.0.0",
+		"eslint-plugin-vue": "^9.16.1",
 		"gh-pages": "^5.0.0",
-		"postcss": "^8.4.5",
-		"prettier": "^2.5.1",
-		"prismjs": "^1.24.1",
-		"roboto-fontface": "*",
-		"sass": "^1.45.2",
-		"sass-loader": "^13.0.2",
-		"vite": "^4.1.1",
-		"vue": "^3.2.25",
-		"vuetify": "^3.0.0-alpha.9",
-		"vuetify-loader": "^2.0.0-alpha.9"
+		"postcss": "^8.4.27",
+		"prettier": "^3.0.1",
+		"prismjs": "^1.29.0",
+		"roboto-fontface": "^0.10.0",
+		"sass": "^1.64.2",
+		"sass-loader": "^13.3.2",
+		"vite": "^4.4.8",
+		"vite-plugin-vuetify": "^1.0.2",
+		"vue": "^3.3.4",
+		"vuetify": "^3.3.11"
 	},
 	"peerDependencies": {
 		"vue": "^3.0.0"
