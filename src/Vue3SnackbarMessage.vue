@@ -45,11 +45,11 @@
 				</div>
 				<div class="spacer"></div>
 				<div class="vue3-snackbar-message-close">
-					<button v-if="props.message.dismissible !== false" @click="dismissClick">
-						<slot name="message-close-icon" :message="props.message">
+					<slot name="message-close-icon" :message="props.message" :is-dimissible="props.message.dismissible" :dismiss="dismissClick">
+						<button v-if="props.message.dismissible !== false" @click="dismissClick">
 							<vue3-icon type="mdi" :path="mdiClose" />
-						</slot>
-					</button>
+						</button>
+					</slot>
 				</div>
 			</div>
 		</slot>
