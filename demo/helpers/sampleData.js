@@ -5,12 +5,16 @@ export default [
 		type: "success",
 		title: "Mission Accomplished",
 		text: "Something was completed",
+		textColor: '#7D5BA6',
+		iconColor: '#7D5BA6',
 	},
 	{
 		type: "info",
 		title: "Important Information",
 		text: "Some important information will appear here",
 		dismissible: false,
+		textColor: '#F0C808',
+		iconColor: '#F0C808',
 	},
 	{
 		type: "info",
@@ -22,6 +26,8 @@ export default [
 		type: "warning",
 		title: "Here Be Dragons",
 		text: "This is a warning about something",
+		textColor: '#34495E',
+		iconColor: '#34495E',
 	},
 	{
 		type: "error",

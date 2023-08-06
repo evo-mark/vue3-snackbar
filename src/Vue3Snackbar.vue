@@ -57,6 +57,8 @@ const generatedBaseStyles = computed(() => {
 		"--background-opacity": props.backgroundOpacity,
 		"--background-color": props.backgroundColor,
 		"--base-background-color": props.baseBackgroundColor,
+		"--message-text-color": props.messageTextColor,
+		"--message-icon-color": props.messageIconColor,
 	};
 });
 
