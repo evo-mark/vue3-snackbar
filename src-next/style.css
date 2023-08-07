@@ -1,0 +1,37 @@
+.vue3-snackbar {
+    position: fixed;
+    margin: 1rem;
+	padding: 0;
+	z-index: var(--snackbar-z-index);
+	pointer-events: none;
+
+    &--top {
+        top: 0;
+    }
+
+    &--bottom {
+        bottom: 0;
+    }
+
+    &--left {
+        left: 0;
+    }
+
+    &--right {
+        right: 0;
+    }
+
+    &--middle {
+		top: 50%;
+		transform: translateY(-50%);
+	}
+
+	&--centre {
+		left: 50%;
+		transform: translateX(-50%);
+	}
+
+    &--shadow .vue3-snackbar__message {
+		box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+	}
+}

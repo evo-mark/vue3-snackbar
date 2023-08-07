@@ -1,0 +1,23 @@
+{
+  "name": "src-next",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "vite build --watch",
+    "build": "vite build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@mdi/js": "^7.2.96",
+    "vue3-icon": "^2.1.0"
+  },
+  "devDependencies": {
+    "postcss-nested": "^6.0.1",
+    "vite": "^4.4.8",
+    "vue": "^3.3.4"
+  }
+}

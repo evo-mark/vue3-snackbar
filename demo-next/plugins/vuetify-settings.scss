@@ -1,0 +1,6 @@
+// settings.scss
+@use 'vuetify/settings' with (
+  $color-pack: false,
+  $utilities: false,
+  $reset: false
+);

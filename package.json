@@ -3,6 +3,7 @@
 	"version": "2.2.0",
 	"author": "Craig Riley",
 	"scripts": {
+		"dev": "pnpm --filter '*-next' run dev",
 		"build": "vite build -c vite-build.config.js",
 		"demo": "vite",
 		"demo:build": "vite build",
