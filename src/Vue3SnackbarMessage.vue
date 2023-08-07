@@ -14,6 +14,8 @@
 		]"
 		:style="{
 			'--message-background': props.message.background,
+			'--message-text-color': props.message.textColor,
+			'--message-icon-color': props.message.iconColor,
 		}"
 	>
 		<slot name="message-inner" :message="props.message">

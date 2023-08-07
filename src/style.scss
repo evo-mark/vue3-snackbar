@@ -38,7 +38,7 @@
 
 .vue3-snackbar-message {
 	display: flex;
-	color: #fff;
+	color: var(--message-text-color, #fff);
 	margin-bottom: 16px;
 	position: relative;
 	border-radius: 4px;
@@ -135,6 +135,7 @@
 	&-icon {
 		margin-right: 16px;
 		display: flex;
+		color: var(--message-icon-color, currentColor);
 	}
 
 	&-close {

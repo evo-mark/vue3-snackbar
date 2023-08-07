@@ -51,6 +51,14 @@ export const propsModel = {
 		type: String,
 		default: "#2196f3",
 	},
+	messageTextColor: {
+		type: String,
+		default: "#fff",
+	},
+	messageIconColor: {
+		type: String,
+		default: "currentColor",
+	},
 	/* ******************************************
 	 * OTHER PROPS
 	 ****************************************** */
