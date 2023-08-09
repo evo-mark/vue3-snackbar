@@ -1,8 +1,10 @@
-import { defineComponent, h, Teleport, normalizeClass, computed, type PropType, TransitionGroup } from "vue";
-import type { MessageType } from "../types";
+import { defineComponent, h, Teleport, normalizeClass, type PropType, TransitionGroup } from "vue";
+import { mdiCheckCircle, mdiClose, mdiInformationOutline, mdiAlertOctagonOutline, mdiAlertOutline } from "@mdi/js";
+import type { MessageType, Vue3Icon } from "../types";
+import { HTMLShim } from "../helpers/propTypes";
 import { useSnackbarPosition } from "../composables/useSnackbarPosition";
 import { messages } from "../store/messages";
-import SnackbarMessage from "./message.vue";
+import SnackbarMessage from "./message";
 
 export default defineComponent({
     props: {
@@ -40,17 +42,22 @@ export default defineComponent({
         // GENERAL
 
         attach: {
-            type: [String,HTMLElement],
+            type: [String,HTMLShim],
             default: "body"
         },
 
         tag: {
-            type: String,
+            type: String as PropType<keyof HTMLElementTagNameMap>,
             default: "section"
         },
 
-        messageTag: {
+        messageClass: {
             type: String,
+            default: ""
+        },
+
+        messageTag: {
+            type: String as PropType<keyof HTMLElementTagNameMap>,
             default: "article"
         },
 
@@ -74,6 +81,7 @@ export default defineComponent({
         success: {
             type: [Object, String] as PropType<MessageType | string>,
             default: () => ({
+                icon: mdiCheckCircle,
                 class: "vue3-snackbar__message--success"
             })
         },
@@ -81,6 +89,7 @@ export default defineComponent({
         info: {
             type: [Object, String] as PropType<MessageType | string>,
             default: () => ({
+                icon: mdiInformationOutline,
                 class: "vue3-snackbar__message--info"
             })
         },
@@ -88,6 +97,7 @@ export default defineComponent({
         warning: {
             type: [Object, String] as PropType<MessageType | string>,
             default: () => ({
+                icon: mdiAlertOutline,
                 class: "vue3-snackbar__message--warning"
             })
         },
@@ -95,31 +105,60 @@ export default defineComponent({
         error: {
             type: [Object, String] as PropType<MessageType | string>,
             default: () => ({
+                icon: mdiAlertOctagonOutline,
                 class: "vue3-snackbar__message--error"
             })
+        },
+
+        width: {
+            type: String,
+            default: "min(50vw, 350px)"
+        },
+
+        max: {
+            type: Number,
+            default: Infinity
         }
     },
-    setup(props, context) {
+    setup(props, { slots, attrs }) {
 
         const positionClass = useSnackbarPosition(props);
 
-        return () => h(Teleport, {
-            to: props.attach
-        }, h(props.tag, {
-            class: normalizeClass([
-                props.class, 
-                positionClass.value, 
-                {
-                    'vue3-snackbar': !props.class,
-                    'vue3-snackbar--shadow': props.shadow
+        const createMessageComponents = () => {
+            return messages.value.map(message => {
+                return h(props.messageComponent, {
+                    key: message.id,
+                    tag: props.messageTag,
+                    type: message.type ? props[message.type] : null,
+                    message,
+                    class: props.messageClass,
+                    ...attrs
+                }, slots);
+            });
+        };
+
+        const createTransitionGroup = () => {
+            return h(TransitionGroup, {}, { default: createMessageComponents });
+        };
+
+        const createRootComponent = () => {
+            return h(props.tag, {
+                class: normalizeClass([
+                    props.class,
+                    positionClass.value,
+                    {
+                        'vue3-snackbar': !props.class,
+                        'vue3-snackbar--shadow': props.shadow
+                    }
+                ]),
+                style: {
+                    width: props.width
                 }
-            ])
-        }, h(TransitionGroup, {}, {
-            default: () => messages.value.map(message => {
-            return h(props.messageComponent, {
-                tag: props.messageTag,
-                message
-            })
-        })})));
+            }, createTransitionGroup());
+        };
+
+        return () => {
+            return h(Teleport, { to: props.attach }, createRootComponent());
+        };
     }
 })

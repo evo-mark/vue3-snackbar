@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+      // Your TypeScript compiler options here
+      "target": "ESNext",
+      "module": "CommonJS",
+      "isolatedModules": true,
+      "strict": true,
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true,
+      "moduleResolution": "node",
+      "resolveJsonModule": true,
+      "outDir": "./dist",
+      "baseUrl": "./"
+      // ... any other compiler options you need
+    },
+    "exclude": [
+      "node_modules"
+    ]
+  }

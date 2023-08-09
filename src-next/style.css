@@ -1,5 +1,8 @@
 .vue3-snackbar {
     position: fixed;
+    display: flex;
+    flex-flow: column;
+    row-gap: 16px;
     margin: 1rem;
 	padding: 0;
 	z-index: var(--snackbar-z-index);
@@ -34,4 +37,35 @@
     &--shadow .vue3-snackbar__message {
 		box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 	}
+}
+
+.vue3-snackbar__message {
+    display: grid;
+    grid-template-areas: "icon title close" "icon message close" "icon action action";
+    grid-template-columns: auto 1fr auto;
+    pointer-events: auto;
+
+    &--icon {
+        grid-area: icon;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &--title {
+        grid-area: title;
+    }
+
+    &--close {
+        grid-area: close;
+        cursor: pointer;
+    }
+
+    &--message {
+        grid-area: message;
+    }
+
+    &--action {
+        grid-area: action;
+    }
 }
