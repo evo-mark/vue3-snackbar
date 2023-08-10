@@ -52,10 +52,23 @@ export default defineComponent({
             }, h(SvgIcon, messageIcon.value))
         }
 
+        const createBadge = () => {
+            return h("div", {
+                class: "vue3-snackbar__message--badge"
+            }, slots['message-badge'] ?
+                        slots['message-badge']({ message: props.message }) :
+                        "1"
+            );
+
+        }
+
         const createTitle = () => {
             return h("p", {
                 class: "vue3-snackbar__message--title"
-            }, props.message.title)
+            }, slots['message-title'] ?
+                        slots['message-title']({ message: props.message }) :
+                        props.message.title
+                    )
         }
 
         const createMessage = () => {
@@ -67,7 +80,12 @@ export default defineComponent({
         const createClose = () => {
             return h("button", {
                 class: "vue3-snackbar__message--close"
-            }, h(SvgIcon, resolveIcon(props.closeIcon)))
+            }, h(SvgIcon, {
+                ...resolveIcon(props.closeIcon),
+                onClick: (ev: Event) => {
+                    console.log(ev);
+                }
+            }))
         }
 
         const createAction = () => {
@@ -85,9 +103,11 @@ export default defineComponent({
                 props.class,
                 props.message.class,
                 typeClass.value,
-            ])
+            ]),
+            'data-id': props.message.id,
+            role: 'status'
         }, slots['message-inner'] ?
                 slots['message-inner']({ message: props.message }) :
-                [createIcon(), createTitle(), createClose(), createMessage(), createAction()]);
+                [createBadge(), createIcon(), createTitle(), createClose(), createMessage(), createAction()]);
     }
 });

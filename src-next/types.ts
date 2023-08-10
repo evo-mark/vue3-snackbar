@@ -38,4 +38,5 @@ export interface SnackbarMessage {
     icon?: string|Vue3Icon;
     type?: "success"|"error"|"warning"|"info";
     duration?: number;
+    group?: string;
 }

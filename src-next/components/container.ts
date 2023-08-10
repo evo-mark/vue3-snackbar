@@ -1,12 +1,20 @@
 import { defineComponent, h, Teleport, normalizeClass, type PropType, TransitionGroup } from "vue";
-import { mdiCheckCircle, mdiClose, mdiInformationOutline, mdiAlertOctagonOutline, mdiAlertOutline } from "@mdi/js";
-import type { MessageType, Vue3Icon } from "../types";
+import { mdiCheckCircle, mdiInformationOutline, mdiAlertOctagonOutline, mdiAlertOutline } from "@mdi/js";
+import type { MessageType, SnackbarMessage as SnackbarMessageInterface } from "../types";
 import { HTMLShim } from "../helpers/propTypes";
 import { useSnackbarPosition } from "../composables/useSnackbarPosition";
-import { messages } from "../store/messages";
+import { messages, setConfig } from "../store/messages";
 import SnackbarMessage from "./message";
 
+export const emits = {
+    added: (payload: SnackbarMessageInterface) => {
+
+    }
+}
+
 export default defineComponent({
+    // ["added", "dismissed", "removed", "cleared"];
+    emits: emits,
     props: {
         // LOCATION PROPS
 
@@ -118,10 +126,16 @@ export default defineComponent({
         max: {
             type: Number,
             default: Infinity
+        },
+
+        duration: {
+            type: Number,
+            default: 4000
         }
     },
-    setup(props, { slots, attrs }) {
+    setup(props, { slots, attrs, emit }) {
 
+        setConfig(props, emit);
         const positionClass = useSnackbarPosition(props);
 
         const createMessageComponents = () => {

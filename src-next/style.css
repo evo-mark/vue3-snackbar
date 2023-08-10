@@ -44,6 +44,7 @@
     grid-template-areas: "icon title close" "icon message close" "icon action action";
     grid-template-columns: auto 1fr auto;
     pointer-events: auto;
+    position: relative;
 
     &--icon {
         grid-area: icon;
@@ -59,6 +60,25 @@
     &--close {
         grid-area: close;
         cursor: pointer;
+        position: relative;
+
+        &::before {
+            position: absolute;
+            content: "";
+            inset: -4px;
+            background: currentColor;
+            opacity: 0;
+            transition: opacity 150ms ease-in-out;
+            border-radius: 50%;
+        }
+
+        &:hover::before {
+            opacity: 0.12;
+        }
+
+        &:active::before {
+            opacity: 0.2;
+        }
     }
 
     &--message {
@@ -68,4 +88,24 @@
     &--action {
         grid-area: action;
     }
+
+    &--badge {
+        position: absolute;
+        top: 0;
+        right: 100%;
+        font-size: 0.9em;
+		font-weight: bold;
+		padding: 0.125em 0.5em;
+		border-radius: 8px;
+		position: absolute;
+		background: #c10015;
+		border: 1px solid crimson;
+		box-shadow: 0 1px 3px #0003, 0 1px 1px #00000024, 0 2px 1px -1px #0000001f;
+		color: white;
+    }
+}
+
+
+.vue3-snackbar--left .vue3-snackbar__message--badge {
+
 }
