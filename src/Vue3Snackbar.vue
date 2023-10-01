@@ -32,6 +32,9 @@ import { propsModel } from "./props.js";
 import { messages } from "./service.js";
 import EventBus from "./eventbus";
 
+/**
+ * @const {import("./props.js").SnackbarProps} props
+ */
 const props = defineProps({ ...propsModel });
 const emit = defineEmits(["added", "dismissed", "removed", "cleared"]);
 

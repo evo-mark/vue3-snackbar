@@ -1,0 +1,13 @@
+{
+  "opts": {
+    "template": "./node_modules/tsd-jsdoc/dist",
+    "recurse": true,
+    "destination": "."
+  },
+  "source": {
+    "includePattern": ".+\\.(js|vue)?$"
+  },
+  "plugins": [
+    "node_modules/jsdoc-vuejs"
+  ]
+}

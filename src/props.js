@@ -1,33 +1,46 @@
 const HTMLElementShim = typeof window !== "undefined" ? HTMLElement : Object;
 
+/**
+ * @typedef { Object } SnackbarProps
+ * @property { boolean } top Render the snackbar at the top of the screen
+ * @property { boolean } bottom Render the snackbar at the bottom of the screen
+ * @property { boolean } left Render the snackbar at the left of the screen
+ * @property { boolean } right Render the snackbar at the right of the screen
+ * @property { string } success Base colour to use for success messages
+ * @property { string } error Base colour to use for error messages
+ * @property { string } warning Base colour to use for warning messages
+ * @property { string } info Base colour to use for info messages
+ * @property { string } messageTextColor Text colour for the default message
+ * @property { string } messageIconColor Icon colour for the default message
+ * @property { string|HTMLElementShim } attach HTML element to attach the container to
+ * @property { "top"|"bottom"|"left"|"right"} border Use the alternative border-style messages
+ * @property { string|number } backgroundOpacity The background colour opacity when using border-style messages
+ * @property { string } backgroundColor Background colour when using border-style messages
+ * @property { string } baseBackgroundColor Base background colour when using border-style messages
+ * @property { number } duration The default time in ms for messages to stay on the screen
+ * @property { string } messageClass Class string to add to each message
+ * @property { number } zIndex The z-index value of the snackbar container
+ * @property { boolean } dense Reduce padding on the y-axis for snackbar messages
+ * @property { boolean } reverse Reverse the display order of snackbar messages
+ * @property { boolean } groups Use snackbar groups with messages with the same group-key
+ * @property { boolean } shadow Add shadow effect to messages
+ */
 export const propsModel = {
 	/* ******************************************
 	 * LOCATION PROPS
 	 ****************************************** */
-	/**
-	 * Render the snackbar at the top of the screen
-	 */
 	top: {
 		type: Boolean,
 		default: false,
 	},
-	/**
-	 * Render the snackbar at the bottom of the screen
-	 */
 	bottom: {
 		type: Boolean,
 		default: false,
 	},
-	/**
-	 * Render the snackbar on the left of the screen
-	 */
 	left: {
 		type: Boolean,
 		default: false,
 	},
-	/**
-	 * Render the snackbar on the right of the screen
-	 */
 	right: {
 		type: Boolean,
 		default: false,
@@ -62,24 +75,15 @@ export const propsModel = {
 	/* ******************************************
 	 * OTHER PROPS
 	 ****************************************** */
-	/**
-	 * The element to teleport the snackbar container to
-	 */
 	attach: {
 		type: [String, HTMLElementShim],
 		default: "body",
 	},
-	/**
-	 * Use the alternate border style for messages
-	 */
 	border: {
 		type: String,
 		default: "",
 		validator: (v) => ["top", "bottom", "left", "right", ""].includes(v),
 	},
-	/**
-	 * The background colour opacity when using border-style messages
-	 */
 	backgroundOpacity: {
 		type: [String, Number],
 		default: 0.12,
@@ -87,64 +91,37 @@ export const propsModel = {
 			return !isNaN(parseFloat(v)) && isFinite(v);
 		},
 	},
-	/**
-	 * Background colour when using border-style messages
-	 */
 	backgroundColor: {
 		type: String,
 		default: "currentColor",
 	},
-	/**
-	 * Background colour when using border-style messages
-	 */
 	baseBackgroundColor: {
 		type: String,
 		default: "#fff",
 	},
-	/**
-	 * The default time in ms for messages to stay on the screen
-	 */
 	duration: {
 		type: Number,
 		default: null,
 	},
-	/**
-	 * Class string to add to each message
-	 */
 	messageClass: {
 		type: String,
 	},
-	/**
-	 * The z-index value of the snackbar container
-	 */
 	zIndex: {
 		type: Number,
 		default: 10000,
 	},
-	/**
-	 * Reduce padding on the y-axis for snackbar messages
-	 */
 	dense: {
 		type: Boolean,
 		default: false,
 	},
-	/**
-	 * Reverse the display order of snackbar messages
-	 */
 	reverse: {
 		type: Boolean,
 		default: false,
 	},
-	/**
-	 * Use snackbar groups with messages with the same group-key
-	 */
 	groups: {
 		type: Boolean,
 		default: false,
 	},
-	/**
-	 * Add shadow effect to messages
-	 */
 	shadow: {
 		type: Boolean,
 		default: false,

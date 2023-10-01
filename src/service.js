@@ -2,15 +2,28 @@ import EventBus from "./eventbus";
 import { inject, ref } from "vue";
 
 export const messages = ref([]);
-
-/**
- * A unique identifier to access the provided/injected method
- */
 export const SnackbarSymbol = Symbol();
 
 /**
+ * @callback add
+ * @param { SnackbarMessage } message
+ * @returns { void }
+ */
+
+/**
+ * @callback clear
+ * @returns { void }
+ */
+
+/**
+ * @typedef { Object } SnackbarService
+ * @property { add } add Add a message to the stack
+ * @property { clear } clear Clear messages from the stack
+ */
+
+/**
  * Composable which allows accessing the Toast service in Composition API
- * @returns Snackbar
+ * @returns { SnackbarService }
  */
 export function useSnackbar() {
 	const Snackbar = inject(SnackbarSymbol);
@@ -25,7 +38,9 @@ export function useSnackbar() {
  * Vue app install. Global property for Options API and provided service for Composition API
  */
 export const SnackbarService = {
-	install: (app) => {
+	install: (app, config = {}) => {
+        const { disableGlobals = false } = config;
+
 		const SnackbarService = {
 			add: (message) => {
 				EventBus.$emit("add", message);
@@ -34,8 +49,10 @@ export const SnackbarService = {
 				EventBus.$emit("clear");
 			},
 		};
-		app.config.globalProperties.$snackbar = SnackbarService;
-		if (typeof window !== "undefined") window.$snackbar = SnackbarService;
+        if (disableGlobals !== true) {
+            app.config.globalProperties.$snackbar = SnackbarService;
+            if (typeof window !== "undefined") window.$snackbar = SnackbarService;
+        }
 		app.provide(SnackbarSymbol, SnackbarService);
 	},
 };

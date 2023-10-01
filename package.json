@@ -4,6 +4,7 @@
 	"author": "Craig Riley",
 	"scripts": {
 		"build": "vite build -c vite-build.config.js",
+		"build:types": "jsdoc src -c ./jsdoc-conf.json",
 		"demo": "vite",
 		"demo:build": "vite build",
 		"demo:deploy": "gh-pages -d demo/dist",
@@ -11,6 +12,7 @@
 		"preinstall": "npx only-allow pnpm"
 	},
 	"type": "module",
+	"types": "./types.d.ts",
 	"main": "./dist/vue3-snackbar.cjs",
 	"module": "./dist/vue3-snackbar.js",
 	"exports": {
@@ -35,16 +37,20 @@
 		"eslint-config-prettier": "^9.0.0",
 		"eslint-plugin-vue": "^9.16.1",
 		"gh-pages": "^5.0.0",
+		"jsdoc": "^3.6.11",
+		"jsdoc-vuejs": "^4.0.0",
 		"postcss": "^8.4.27",
 		"prettier": "^3.0.1",
 		"prismjs": "^1.29.0",
 		"roboto-fontface": "^0.10.0",
 		"sass": "^1.64.2",
 		"sass-loader": "^13.3.2",
+		"tsd-jsdoc": "^2.5.0",
 		"vite": "^4.4.8",
 		"vite-plugin-vuetify": "^1.0.2",
 		"vue": "^3.3.4",
-		"vuetify": "^3.3.11"
+		"vuetify": "^3.3.11",
+		"xo": "^0.39.1"
 	},
 	"peerDependencies": {
 		"vue": "^3.0.0"
