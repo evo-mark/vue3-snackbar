@@ -5,6 +5,13 @@
 	z-index: var(--snackbar-zindex);
 	pointer-events: none;
 
+    &.is-rtl {
+        .vue3-snackbar-message-icon {
+            margin-right: 0;
+            margin-left: 16px;
+        }
+    }
+
 	&.is-top {
 		top: 0;
 	}

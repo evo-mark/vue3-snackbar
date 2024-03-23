@@ -1,4 +1,4 @@
-export default {
+module.exports = {
 	root: true,
 	env: {
 		es2021: true,
@@ -9,10 +9,5 @@ export default {
 		defineProps: "readonly",
 		defineEmits: "readonly",
 		defineExpose: "readonly",
-		$: "readonly",
-		$$: "readonly",
-		$ref: "readonly",
-		$computed: "readonly",
-		$shallowRef: "readonly",
 	},
 };

@@ -24,6 +24,7 @@ const HTMLElementShim = typeof window !== "undefined" ? HTMLElement : Object;
  * @property { boolean } reverse Reverse the display order of snackbar messages
  * @property { boolean } groups Use snackbar groups with messages with the same group-key
  * @property { boolean } shadow Add shadow effect to messages
+ *
  */
 export const propsModel = {
 	/* ******************************************
@@ -100,7 +101,7 @@ export const propsModel = {
 		default: "#fff",
 	},
 	duration: {
-		type: Number,
+		type: [Number,String],
 		default: null,
 	},
 	messageClass: {

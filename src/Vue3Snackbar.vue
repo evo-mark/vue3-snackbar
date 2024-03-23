@@ -16,7 +16,8 @@
 					:border-class="borderClass"
 					@dismiss="remove($event, true)"
 				>
-					<template v-for="(_, name) in $slots" v-slot:[name]="slotData">
+                    <!-- @ts-ignore -->
+					<template v-for="(_, name) in $slots" #[name]="slotData">
 						<slot :name="name" v-bind="slotData" />
 					</template>
 				</SnackbarMessage>
@@ -27,10 +28,12 @@
 
 <script setup>
 import SnackbarMessage from "./Vue3SnackbarMessage.vue";
-import { onMounted, onUnmounted, computed } from "vue";
+import { onUnmounted, computed } from "vue";
 import { propsModel } from "./props.js";
 import { messages } from "./service.js";
 import EventBus from "./eventbus";
+import { useTextDirection } from "@vueuse/core";
+const textDirection = useTextDirection();
 
 /**
  * @const {import("./props.js").SnackbarProps} props
@@ -47,6 +50,7 @@ const generatedBaseClasses = computed(() => {
 		"is-middle": props.top === false && props.bottom === false,
 		"is-centre": props.left === false && props.right === false,
 		"has-shadow": props.shadow,
+        "is-rtl": textDirection.value === 'rtl'
 	};
 });
 
@@ -71,12 +75,12 @@ const hashCode = (s) => Math.abs(s.split("").reduce((a, b) => ((a << 5) - a + b.
 
 let messageId = 1;
 
-onMounted(() => {
+
 	EventBus.$on("add", (ev) => {
 		emit("added", ev);
 		if (!ev.group) ev.group = hashCode(`${ev.type}${ev.title}${ev.text}`).toString(16);
 		// If there's a default duration and no message duration is set, use the default
-		if (props.duration && !ev.duration && ev.duration !== 0) ev.duration = props.duration;
+		if (props.duration && !ev.duration && ev.duration !== 0) ev.duration = +props.duration;
 		// Find the existing message if one with the same group-key already exists
 		const existingGroup = ev.group && messages.value.find((msg) => msg.group === ev.group);
 
@@ -98,7 +102,7 @@ onMounted(() => {
 		emit("cleared");
 		messages.value = [];
 	});
-});
+
 
 onUnmounted(() => {
 	EventBus.$off("add");
@@ -114,6 +118,6 @@ const remove = (ev, wasDismissed = false) => {
 };
 </script>
 
-<style lang="scss">
-@import "./style.scss";
+<style lang="postcss">
+@import "./style.postcss";
 </style>
