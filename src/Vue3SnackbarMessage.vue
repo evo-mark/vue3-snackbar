@@ -48,7 +48,13 @@
 				<div class="spacer"></div>
 				<div class="vue3-snackbar-message-close">
 					<!-- typo is-dimissible will be removed in the next major version -->
-					<slot name="message-close-icon" :message="props.message" :is-dimissible="props.message.dismissible" :is-dismissible="props.message.dismissible" :dismiss="dismissClick">
+					<slot
+						name="message-close-icon"
+						:message="props.message"
+						:is-dimissible="props.message.dismissible"
+						:is-dismissible="props.message.dismissible"
+						:dismiss="dismissClick"
+					>
 						<button v-if="props.message.dismissible !== false" @click="dismissClick">
 							<vue3-icon type="mdi" :path="mdiClose" />
 						</button>
@@ -109,7 +115,7 @@ watch(
 		}, 1000);
 		hasShake.value = true;
 		setMessageTimeout();
-	}
+	},
 );
 const dismissClick = () => {
 	if (timeout) clearTimeout(timeout);

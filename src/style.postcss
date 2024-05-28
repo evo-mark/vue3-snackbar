@@ -5,12 +5,12 @@
 	z-index: var(--snackbar-zindex);
 	pointer-events: none;
 
-    &.is-rtl {
-        .vue3-snackbar-message-icon {
-            margin-right: 0;
-            margin-left: 16px;
-        }
-    }
+	&.is-rtl {
+		.vue3-snackbar-message-icon {
+			margin-right: 0;
+			margin-left: 16px;
+		}
+	}
 
 	&.is-top {
 		top: 0;
@@ -39,7 +39,9 @@
 	}
 
 	&.has-shadow .vue3-snackbar-message {
-		box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+		box-shadow:
+			0 10px 15px -3px rgb(0 0 0 / 0.1),
+			0 4px 6px -4px rgb(0 0 0 / 0.1);
 	}
 }
 
@@ -210,7 +212,10 @@
 		position: absolute;
 		background: #c10015;
 		border: 1px solid crimson;
-		box-shadow: 0 1px 3px #0003, 0 1px 1px #00000024, 0 2px 1px -1px #0000001f;
+		box-shadow:
+			0 1px 3px #0003,
+			0 1px 1px #00000024,
+			0 2px 1px -1px #0000001f;
 		color: white;
 		top: 0;
 		left: 0;
@@ -243,10 +248,15 @@
 	}
 }
 .vue3-snackbar-message-enter-active {
-	transition: transform 0.3s, opacity 0.3s;
+	transition:
+		transform 0.3s,
+		opacity 0.3s;
 }
 .vue3-snackbar-message-leave-active {
-	transition: max-height 0.45s cubic-bezier(0, 1, 0, 1), opacity 0.3s, margin-bottom 0.3s;
+	transition:
+		max-height 0.45s cubic-bezier(0, 1, 0, 1),
+		opacity 0.3s,
+		margin-bottom 0.3s;
 }
 
 @keyframes headShake {

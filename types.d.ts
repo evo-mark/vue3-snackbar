@@ -23,28 +23,28 @@
  * @property shadow - Add shadow effect to messages
  */
 declare type SnackbarProps = {
-    top: boolean;
-    bottom: boolean;
-    left: boolean;
-    right: boolean;
-    success: string;
-    error: string;
-    warning: string;
-    info: string;
-    messageTextColor: string;
-    messageIconColor: string;
-    attach: string | HTMLElementShim;
-    border: "top" | "bottom" | "left" | "right";
-    backgroundOpacity: string | number;
-    backgroundColor: string;
-    baseBackgroundColor: string;
-    duration: number;
-    messageClass: string;
-    zIndex: number;
-    dense: boolean;
-    reverse: boolean;
-    groups: boolean;
-    shadow: boolean;
+	top: boolean;
+	bottom: boolean;
+	left: boolean;
+	right: boolean;
+	success: string;
+	error: string;
+	warning: string;
+	info: string;
+	messageTextColor: string;
+	messageIconColor: string;
+	attach: string | HTMLElementShim;
+	border: "top" | "bottom" | "left" | "right";
+	backgroundOpacity: string | number;
+	backgroundColor: string;
+	baseBackgroundColor: string;
+	duration: number;
+	messageClass: string;
+	zIndex: number;
+	dense: boolean;
+	reverse: boolean;
+	groups: boolean;
+	shadow: boolean;
 };
 
 declare type add = (message: SnackbarMessage) => void;
@@ -56,8 +56,8 @@ declare type clear = () => void;
  * @property clear - Clear messages from the stack
  */
 declare type SnackbarService = {
-    add: add;
-    clear: clear;
+	add: add;
+	clear: clear;
 };
 
 /**
@@ -70,7 +70,6 @@ declare function useSnackbar(): SnackbarService;
  * @property clear - Clear messages from the stack
  */
 declare type SnackbarService = {
-    add: add;
-    clear: clear;
+	add: add;
+	clear: clear;
 };
-

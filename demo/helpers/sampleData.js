@@ -36,7 +36,7 @@ export default [
 			path: mdiImage,
 			type: "mdi",
 		},
-        textColor: '#99ff99',
-		iconColor: '#fff',
+		textColor: "#99ff99",
+		iconColor: "#fff",
 	},
 ];

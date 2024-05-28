@@ -1,7 +1,5 @@
-import PostcssNested from "postcss-nested"
+import PostcssNested from "postcss-nested";
 
 export default {
-    plugins: [
-        PostcssNested()
-    ]
-}
+	plugins: [PostcssNested()],
+};

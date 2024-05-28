@@ -18,7 +18,6 @@
 
 Add a snackbar/toast service to your Vue 3 application and easily alert users about app processes.
 
---- 
+---
 
 For full installation instructions and documentation, visit [evoMark](https://evomark.co.uk/open-source-software/vue3-snackbar/).
-

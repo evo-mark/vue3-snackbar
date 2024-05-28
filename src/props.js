@@ -101,7 +101,7 @@ export const propsModel = {
 		default: "#fff",
 	},
 	duration: {
-		type: [Number,String],
+		type: [Number, String],
 		default: null,
 	},
 	messageClass: {

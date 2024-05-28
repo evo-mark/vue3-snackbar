@@ -13,20 +13,19 @@
 <script setup>
 const emit = defineEmits(["update:modelValue"]);
 defineProps({
-    modelValue: {
-        type: [String, Number],
-        default: "",
-    },
-    label: {
-        type: String,
-        default: "",
-    },
-    name: {
-        type: String,
-        default: "text",
-    },
-
-})
+	modelValue: {
+		type: [String, Number],
+		default: "",
+	},
+	label: {
+		type: String,
+		default: "",
+	},
+	name: {
+		type: String,
+		default: "text",
+	},
+});
 </script>
 
 <style lang="scss" scoped>

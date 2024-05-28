@@ -39,7 +39,7 @@ export function useSnackbar() {
  */
 export const SnackbarService = {
 	install: (app, config = {}) => {
-        const { disableGlobals = false } = config;
+		const { disableGlobals = false } = config;
 
 		const SnackbarService = {
 			add: (message) => {
@@ -49,10 +49,10 @@ export const SnackbarService = {
 				EventBus.$emit("clear");
 			},
 		};
-        if (disableGlobals !== true) {
-            app.config.globalProperties.$snackbar = SnackbarService;
-            if (typeof window !== "undefined") window.$snackbar = SnackbarService;
-        }
+		if (disableGlobals !== true) {
+			app.config.globalProperties.$snackbar = SnackbarService;
+			if (typeof window !== "undefined") window.$snackbar = SnackbarService;
+		}
 		app.provide(SnackbarSymbol, SnackbarService);
 	},
 };

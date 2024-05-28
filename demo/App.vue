@@ -64,7 +64,11 @@
 										<div class="text-overline mb-2">Messages</div>
 										<div class="px-8">
 											<div class="my-4" style="max-width: 200px">
-												<v-text-field v-model="options.duration" label="Default Duration" suffix="ms" />
+												<v-text-field
+													v-model="options.duration"
+													label="Default Duration"
+													suffix="ms"
+												/>
 											</div>
 											<div class="mb-4">
 												<Switch v-model:checked="options.dense" label="Dense" />
@@ -81,7 +85,6 @@
 											<div class="mb-4">
 												<Switch v-model:checked="options.reverse" label="Reverse Stack Order" />
 											</div>
-
 										</div>
 									</v-col>
 									<v-col cols="6">
@@ -193,7 +196,6 @@
 		:background-opacity="options.backgroundOpacity"
 		:background-color="options.backgroundColor"
 		:base-background-color="options.baseBackgroundColor"
-
 	/>
 </template>
 
@@ -218,7 +220,7 @@ watch(
 		if (lastMessage.value && lastMessage.value.id) {
 			delete lastMessage.value.id;
 		}
-	}
+	},
 );
 
 const options = reactive({
@@ -235,7 +237,6 @@ const options = reactive({
 	backgroundOpacity: 0.12,
 	backgroundColor: "currentColor",
 	baseBackgroundColor: "#fff",
-
 });
 
 const code = computed(() => {

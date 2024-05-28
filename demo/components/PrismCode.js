@@ -24,7 +24,7 @@ export default {
 
 		if (process.env.NODE_ENV === "development" && !prismLanguage) {
 			throw new Error(
-				`Prism component for language "${language}" was not found, did you forget to register it? See all available ones: https://cdn.jsdelivr.net/npm/prismjs/components/`
+				`Prism component for language "${language}" was not found, did you forget to register it? See all available ones: https://cdn.jsdelivr.net/npm/prismjs/components/`,
 			);
 		}
 
@@ -39,7 +39,7 @@ export default {
 						class: className,
 						innerHTML: Prism.highlight(code, prismLanguage),
 					}),
-				]
+				],
 			);
 	},
 };
