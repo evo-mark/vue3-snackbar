@@ -14,6 +14,7 @@
 					:message-class="props.messageClass"
 					:dense="props.dense"
 					:border-class="borderClass"
+					:generate-aria-label="(type) => type === 'error' ? 'Error' : 'Alert'"
 					@dismiss="remove($event, true)"
 				>
 					<!-- @ts-ignore -->

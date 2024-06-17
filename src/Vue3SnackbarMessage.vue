@@ -17,6 +17,8 @@
 			'--message-text-color': props.message.textColor,
 			'--message-icon-color': props.message.iconColor,
 		}"
+		role="alert"
+		:aria-label="props.generateAriaLabel(props.message.type)"
 	>
 		<slot name="message-inner" :message="props.message">
 			<div class="vue3-snackbar-message-wrapper">
@@ -89,6 +91,10 @@ const props = defineProps({
 		type: Boolean,
 		default: false,
 	},
+	generateAriaLabel: {
+		type: Function,
+		default: () => "Alert",
+	}
 });
 
 let timeout = null,
