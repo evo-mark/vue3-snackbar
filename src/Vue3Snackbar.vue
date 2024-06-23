@@ -136,7 +136,7 @@ const remove = (ev, wasDismissed = false) => {
 const onClickAction = ($event) => {
 	emit("click:action", $event);
 	if (props.dismissOnActionClick) {
-		remove($event, true);
+		remove($event.message, true);
 	}
 };
 </script>
