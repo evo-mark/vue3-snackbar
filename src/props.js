@@ -1,6 +1,47 @@
 const HTMLElementShim = typeof window !== "undefined" ? HTMLElement : Object;
 
 /**
+ * @typedef {import('vue').VNode} VNode
+ * @typedef {import('vue').Component} Component
+ * @typedef {import('vue').FunctionalComponent} FunctionalComponent
+ * @typedef {VNode | Component | FunctionalComponent | (() => VNode)} Renderable
+ */
+
+/**
+ * @typedef { Object } Vue3Icon
+ * @property { string } type The icon type, e.g. "mdi" or "simple-icons"
+ * @property { Object } faIcon A FontAwesome icon object
+ * @property { Object|string|Array } path The SVG path for the icon
+ * @property { number|string } size The size of the icon
+ * @property { string } viewBox The SVG view-box size
+ * @property { "horizontal"|"vertical"|"both"|null } flip Flip the icon on its given axis/axes
+ * @property { number|string } rotate Degrees to rotate the icon
+ */
+
+/**
+ * @typedef { "alert"|"log"|"marquee"|"status"|"timer" } LiveRegionRole
+ */
+
+/**
+ * @typedef { Object } IconPresets
+ * @property { Vue3Icon } success The vue3-icon props for a message type of success
+ * @property { Vue3Icon } warning The vue3-icon props for a message type of warning
+ * @property { Vue3Icon } info The vue3-icon props for a message type of info
+ * @property { Vue3Icon } error The vue3-icon props for a message type of error
+ */
+
+/**
+ * @typedef { Object } SnackbarMessage
+ * @property { "warning"|"error"|"info"|"success"|null } type The classification of the message
+ * @property { string? } title An optional title string for the message
+ * @property { string } text The text content of the message
+ * @property { number? } duration In ms, the time before the message expires
+ * @property { boolean? } dismissible Can the message be dismissed manually?
+ * @property { LiveRegionRole? } role The aria-role of the message
+ * @property { Renderable? } action Any valid Vue component to render in the action slot
+ */
+
+/**
  * @typedef { Object } SnackbarProps
  * @property { boolean } top Render the snackbar at the top of the screen
  * @property { boolean } bottom Render the snackbar at the bottom of the screen
@@ -24,6 +65,8 @@ const HTMLElementShim = typeof window !== "undefined" ? HTMLElement : Object;
  * @property { boolean } reverse Reverse the display order of snackbar messages
  * @property { boolean } groups Use snackbar groups with messages with the same group-key
  * @property { boolean } shadow Add shadow effect to messages
+ * @property { number } limit The maximum number of messages/message groups to show
+ * @property { IconPresets } iconPresets The preset icon settings for standard message types
  *
  */
 export const propsModel = {
@@ -64,6 +107,10 @@ export const propsModel = {
 	info: {
 		type: String,
 		default: "#2196f3",
+	},
+	iconPresets: {
+		type: Object,
+		default: null,
 	},
 	messageTextColor: {
 		type: String,
@@ -107,6 +154,10 @@ export const propsModel = {
 	messageClass: {
 		type: String,
 	},
+	messageActionClass: {
+		type: String,
+		default: "vue3-snackbar-message-action",
+	},
 	zIndex: {
 		type: Number,
 		default: 10000,
@@ -119,6 +170,10 @@ export const propsModel = {
 		type: Boolean,
 		default: false,
 	},
+	limit: {
+		type: Number,
+		default: null,
+	},
 	groups: {
 		type: Boolean,
 		default: false,
@@ -126,5 +181,9 @@ export const propsModel = {
 	shadow: {
 		type: Boolean,
 		default: false,
+	},
+	dismissOnActionClick: {
+		type: Boolean,
+		default: true,
 	},
 };

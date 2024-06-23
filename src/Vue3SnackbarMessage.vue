@@ -12,6 +12,7 @@
 				'shake-baby-shake': hasShake,
 			},
 		]"
+		:role="messageRole"
 		:style="{
 			'--message-background': props.message.background,
 			'--message-text-color': props.message.textColor,
@@ -44,6 +45,24 @@
 							{{ props.message.text }}
 						</div>
 					</slot>
+					<div
+						v-if="$slots['message-action']"
+						:class="props.messageActionClass"
+						@click="emit('click:action', { message: props.message })"
+					>
+						<slot
+							name="message-action"
+							:message="props.message"
+							:is-dismissible="props.message.dismissible"
+							:dismiss="dismissClick"
+						>
+							<RenderedAction
+								:message="props.message"
+								:is-dismissible="props.message.dismissible"
+								:dismiss="dismissClick"
+							/>
+						</slot>
+					</div>
 				</div>
 				<div class="spacer"></div>
 				<div class="vue3-snackbar-message-close">
@@ -66,12 +85,12 @@
 </template>
 
 <script setup>
-import { mdiCheckCircle, mdiClose, mdiInformationOutline, mdiAlertOctagonOutline, mdiAlertOutline } from "@mdi/js";
+import { mdiCheckCircle, mdiInformationOutline, mdiAlertOctagonOutline, mdiAlertOutline, mdiClose } from "@mdi/js";
 
 import Vue3Icon from "vue3-icon";
-import { onMounted, watch, ref, computed } from "vue";
+import { onMounted, watch, ref, computed, isVNode } from "vue";
 
-const emit = defineEmits(["dismiss"]);
+const emit = defineEmits(["dismiss", "click:action"]);
 const props = defineProps({
 	borderClass: {
 		type: String,
@@ -85,9 +104,17 @@ const props = defineProps({
 		type: String,
 		default: "",
 	},
+	messageActionClass: {
+		type: String,
+		default: "vue3-snackbar-message-action",
+	},
 	dense: {
 		type: Boolean,
 		default: false,
+	},
+	iconPresets: {
+		type: Object,
+		required: true,
 	},
 });
 
@@ -125,26 +152,35 @@ const dismiss = () => {
 	emit("dismiss", props.message);
 };
 
-const types = {
-	success: {
-		path: mdiCheckCircle,
-	},
-	info: {
-		path: mdiInformationOutline,
-	},
-	warning: {
-		path: mdiAlertOutline,
-	},
-	error: {
-		path: mdiAlertOctagonOutline,
-	},
-};
+const generatedIconPresets = computed(() =>
+	Object.assign(
+		{},
+		{
+			success: {
+				path: mdiCheckCircle,
+			},
+			info: {
+				path: mdiInformationOutline,
+			},
+			warning: {
+				path: mdiAlertOutline,
+			},
+			error: {
+				path: mdiAlertOctagonOutline,
+			},
+		},
+		props.iconPresets,
+	),
+);
 
 /**
  * Return the options passed to the vue3-icon component
  */
 const icon = computed(() => {
-	const preset = types[props.message.type];
+	const preset = generatedIconPresets.value[props.message.type];
+	if (props.message.type && !preset) {
+		console.warn("[Vue3 Snackbar] Couldn't find icon preset for type " + props.message.type);
+	}
 	// If a preset is defined
 	if (preset) {
 		preset.type = "mdi";
@@ -160,5 +196,25 @@ const icon = computed(() => {
 			path: "",
 			type: "default",
 		};
+});
+
+/**
+ * Set the aria role of the message
+ */
+const messageRole = computed(() => (props.message.type === "error" ? "alert" : props.message?.role ?? "status"));
+
+/**
+ * Get the rendered component on a message's action property
+ */
+const RenderedAction = computed(() => {
+	const action = props.message.action;
+	if (!action) return null;
+	else if (isVNode(action)) return action;
+	else if (typeof action === "object" && (action.render || action.setup)) {
+		return action;
+	} else if (typeof action === "function") {
+		const vNode = action();
+		return isVNode(vNode) ? action : action();
+	} else return null;
 });
 </script>

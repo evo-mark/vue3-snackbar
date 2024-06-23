@@ -53,6 +53,16 @@
 	border-radius: 4px;
 	pointer-events: all;
 
+	&-action {
+		display: flex;
+		width: 100%;
+		justify-content: flex-end;
+
+		&:not(:empty) {
+			padding-top: 0.5rem;
+		}
+	}
+
 	&.has-border {
 		position: relative;
 		background-color: var(--base-background-color, #fff);

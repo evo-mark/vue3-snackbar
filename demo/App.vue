@@ -70,6 +70,15 @@
 													suffix="ms"
 												/>
 											</div>
+											<div class="my-4" style="max-width: 200px">
+												<v-text-field
+													v-model.number="options.limit"
+													label="Message/Group Limit"
+													type="number"
+													clearable
+													:min="0"
+												/>
+											</div>
 											<div class="mb-4">
 												<Switch v-model:checked="options.dense" label="Dense" />
 											</div>
@@ -84,6 +93,12 @@
 											</div>
 											<div class="mb-4">
 												<Switch v-model:checked="options.reverse" label="Reverse Stack Order" />
+											</div>
+											<div class="mb-4">
+												<Switch
+													v-model:checked="options.dismissOnActionClick"
+													label="Dismiss on Action Click"
+												/>
 											</div>
 										</div>
 									</v-col>
@@ -169,7 +184,7 @@
 						</code>
 						<h5 class="mt-4">Previous Message Code</h5>
 						<code class="align-self-center">
-							<pre v-text="JSON.stringify(lastMessage, undefined, 2).trim()" v-if="lastMessage"></pre>
+							<pre v-if="lastMessage" v-text="JSON.stringify(lastMessage, undefined, 2).trim()"></pre>
 						</code>
 					</v-col>
 				</v-row>
@@ -196,7 +211,15 @@
 		:background-opacity="options.backgroundOpacity"
 		:background-color="options.backgroundColor"
 		:base-background-color="options.baseBackgroundColor"
-	/>
+		:dismiss-on-action-click="options.dismissOnActionClick"
+		:icon-presets="iconPresets"
+		:limit="options.limit"
+		@click:action="onActionClick"
+	>
+		<template #message-action="{ message }">
+			<v-btn v-if="message.type === 'error'" color="primary">Testing</v-btn>
+		</template>
+	</vue3-snackbar>
 </template>
 
 <script setup>
@@ -210,6 +233,7 @@ import { mdiConnection, mdiStackExchange, mdiCompass, mdiPaletteAdvanced, mdiTim
 import sampleMessages from "./helpers/sampleData";
 
 import { mainJs, appTemplate, appScriptOptions, appScriptComposition } from "./helpers/codeExamples";
+import { mdiAccessPoint } from "@mdi/js";
 
 let lastMessage = ref(null);
 
@@ -229,6 +253,7 @@ const options = reactive({
 	left: false,
 	right: true,
 	duration: 0,
+	limit: null,
 	dense: false,
 	groups: false,
 	reverse: false,
@@ -237,6 +262,7 @@ const options = reactive({
 	backgroundOpacity: 0.12,
 	backgroundColor: "currentColor",
 	baseBackgroundColor: "#fff",
+	dismissOnActionClick: true,
 });
 
 const code = computed(() => {
@@ -246,14 +272,16 @@ const code = computed(() => {
 	if (options.left) position.push("left");
 	if (options.right) position.push("right");
 	const other = [];
+	if (options.duration) other.push(`:duration="${options.duration}"`);
+	if (options.limit) other.push(`:limit="${options.limit}"`);
+
 	if (options.border) other.push(`border="${options.border}"`);
 	if (options.dense) other.push("dense");
 
 	if (options.shadow) other.push("shadow");
 	if (options.groups) other.push("groups");
-	return `<vue3-snackbar ${position.join(" ")} :duration="${options.duration}"${
-		other.length > 0 ? " " + other.join(" ") : ""
-	}>
+	if (options.dismissOnActionClick === false) other.push(`:dismiss-on-action-click="false"`);
+	return `<vue3-snackbar ${position.join(" ")} ${other.length > 0 ? " " + other.join(" ") : ""}>
 </vue3-snackbar>`;
 });
 
@@ -292,6 +320,16 @@ const borderOptions = [
 		title: "Bottom Border",
 	},
 ];
+
+const onActionClick = (message) => {
+	console.log(message);
+};
+
+const iconPresets = {
+	success: {
+		path: mdiAccessPoint,
+	},
+};
 </script>
 
 <style lang="scss" scoped>

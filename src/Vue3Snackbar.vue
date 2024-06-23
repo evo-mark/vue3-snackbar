@@ -5,16 +5,20 @@
 			:class="[generatedBaseClasses]"
 			class="vue3-snackbar"
 			:style="generatedBaseStyles"
+			aria-live="polite"
 		>
-			<transition-group name="vue3-snackbar-message" tag="div">
+			<transition-group name="vue3-snackbar-message" tag="div" class="vue3-snackbar--messages">
 				<SnackbarMessage
-					v-for="message in messages"
+					v-for="message in formattedMessages"
 					:key="message.id"
 					:message="message"
 					:message-class="props.messageClass"
+					:message-action-class="props.messageActionClass"
 					:dense="props.dense"
 					:border-class="borderClass"
+					:icon-presets="props.iconPresets"
 					@dismiss="remove($event, true)"
+					@click:action="onClickAction"
 				>
 					<!-- @ts-ignore -->
 					<template v-for="(_, name) in $slots" #[name]="slotData">
@@ -28,7 +32,7 @@
 
 <script setup>
 import SnackbarMessage from "./Vue3SnackbarMessage.vue";
-import { onUnmounted, computed } from "vue";
+import { onUnmounted, computed, watch } from "vue";
 import { propsModel } from "./props.js";
 import { messages } from "./service.js";
 import EventBus from "./eventbus";
@@ -39,7 +43,7 @@ const textDirection = useTextDirection();
  * @const {import("./props.js").SnackbarProps} props
  */
 const props = defineProps({ ...propsModel });
-const emit = defineEmits(["added", "dismissed", "removed", "cleared"]);
+const emit = defineEmits(["added", "dismissed", "removed", "cleared", "click:action"]);
 
 const generatedBaseClasses = computed(() => {
 	return {
@@ -89,11 +93,25 @@ EventBus.$on("add", (ev) => {
 			id: messageId,
 			count: 1,
 		};
-		if (props.reverse) messages.value.unshift(message);
-		else messages.value.push(message);
+		messages.value.push(message);
 		messageId++;
 	} else {
 		existingGroup.count++;
+	}
+});
+
+const formattedMessages = computed(() => {
+	const page = props.limit ? messages.value.slice(props.limit * -1) : [...messages.value];
+	if (props.reverse) return page.reverse();
+	else return page;
+});
+watch(formattedMessages, (msgs) => {
+	const pageIds = msgs.map((msg) => msg.id);
+	const fullIds = messages.value.map((msg) => msg.id);
+	const diffIds = fullIds.filter((id) => !pageIds.includes(id));
+	for (const id of diffIds) {
+		const message = messages.value.find((msg) => msg.id === id);
+		if (message) remove(message, false);
 	}
 });
 
@@ -113,6 +131,13 @@ const remove = (ev, wasDismissed = false) => {
 	messages.value = messages.value.filter((message) => {
 		return message.id !== ev.id;
 	});
+};
+
+const onClickAction = ($event) => {
+	emit("click:action", $event);
+	if (props.dismissOnActionClick) {
+		remove($event, true);
+	}
 };
 </script>
 

@@ -1,4 +1,5 @@
 import { mdiImage } from "@mdi/js";
+import { h } from "vue";
 
 export default [
 	{
@@ -27,6 +28,20 @@ export default [
 		type: "error",
 		title: "Oh Damn",
 		text: "Something went horribly wrong. Bad luck.",
+	},
+	{
+		type: "info",
+		title: "Added to Cart",
+		text: "4x Brawndo 500ml added to cart",
+		action: {
+			props: {
+				message: Object,
+			},
+			setup(props) {
+				console.log(props);
+				return () => h("button", {}, "Go to Checkout");
+			},
+		},
 	},
 	{
 		title: "Custom Message",
