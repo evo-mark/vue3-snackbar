@@ -38,11 +38,11 @@
         "@vueuse/core": "^10.11.0",
         "eslint": "^8.57.0",
         "eslint-config-prettier": "^9.1.0",
-        "eslint-plugin-vue": "^9.26.0",
+        "eslint-plugin-vue": "^9.27.0",
         "gh-pages": "^6.1.1",
         "jsdoc": "^4.0.3",
         "jsdoc-vuejs": "^4.0.0",
-        "postcss": "^8.4.38",
+        "postcss": "^8.4.39",
         "postcss-nested": "^6.0.1",
         "prettier": "^3.3.2",
         "prismjs": "^1.29.0",
@@ -50,11 +50,11 @@
         "sass": "^1.77.6",
         "sass-loader": "^13.3.3",
         "tsd-jsdoc": "^2.5.0",
-        "typescript": "^5.5.2",
-        "vite": "^5.3.1",
+        "typescript": "^5.5.3",
+        "vite": "^5.3.2",
         "vite-plugin-vuetify": "^2.0.3",
-        "vue": "^3.4.30",
-        "vuetify": "^3.6.10"
+        "vue": "^3.4.31",
+        "vuetify": "^3.6.11"
     },
     "peerDependencies": {
         "vue": "^3.0.0"

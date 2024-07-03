@@ -32,7 +32,7 @@
 
 <script setup>
 import SnackbarMessage from "./Vue3SnackbarMessage.vue";
-import { onUnmounted, computed, watch } from "vue";
+import { onMounted, onUnmounted, computed, watch } from "vue";
 import { propsModel } from "./props.js";
 import { messages } from "./service.js";
 import EventBus from "./eventbus";
@@ -79,25 +79,27 @@ const hashCode = (s) => Math.abs(s.split("").reduce((a, b) => ((a << 5) - a + b.
 
 let messageId = 1;
 
-EventBus.$on("add", (ev) => {
-	emit("added", ev);
-	if (!ev.group) ev.group = hashCode(`${ev.type}${ev.title}${ev.text}`).toString(16);
-	// If there's a default duration and no message duration is set, use the default
-	if (props.duration && !ev.duration && ev.duration !== 0) ev.duration = +props.duration;
-	// Find the existing message if one with the same group-key already exists
-	const existingGroup = ev.group && messages.value.find((msg) => msg.group === ev.group);
+onMounted(() => {
+	EventBus.$on("add", (ev) => {
+		emit("added", ev);
+		if (!ev.group) ev.group = hashCode(`${ev.type}${ev.title}${ev.text}`).toString(16);
+		// If there's a default duration and no message duration is set, use the default
+		if (props.duration && !ev.duration && ev.duration !== 0) ev.duration = +props.duration;
+		// Find the existing message if one with the same group-key already exists
+		const existingGroup = ev.group && messages.value.find((msg) => msg.group === ev.group);
 
-	if (props.groups === false || !existingGroup) {
-		const message = {
-			...ev,
-			id: messageId,
-			count: 1,
-		};
-		messages.value.push(message);
-		messageId++;
-	} else {
-		existingGroup.count++;
-	}
+		if (props.groups === false || !existingGroup) {
+			const message = {
+				...ev,
+				id: messageId,
+				count: 1,
+			};
+			messages.value.push(message);
+			messageId++;
+		} else {
+			existingGroup.count++;
+		}
+	});
 });
 
 const formattedMessages = computed(() => {
