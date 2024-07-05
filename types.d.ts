@@ -100,7 +100,7 @@ declare module "props" {
         namespace iconPresets {
             let type_8: ObjectConstructor;
             export { type_8 as type };
-            let _default_8: any;
+            function _default_8(): void;
             export { _default_8 as default };
         }
         namespace messageTextColor {

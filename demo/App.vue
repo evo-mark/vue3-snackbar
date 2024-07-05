@@ -1,7 +1,7 @@
 <template>
 	<v-app>
 		<v-app-bar color="secondary px-6" app>
-			<header-partial />
+			<HeaderPartial />
 		</v-app-bar>
 		<v-main>
 			<v-container class="pt-16">
@@ -165,10 +165,10 @@
 										<div class="text-overline mb-2">Actions</div>
 
 										<div class="mb-4">
-											<v-btn @click="addRandomMessage" color="secondary" block>Add Message</v-btn>
+											<v-btn color="secondary" block @click="addRandomMessage">Add Message</v-btn>
 										</div>
 										<div class="mb-4">
-											<v-btn @click="snackbar.clear()" color="accent" block
+											<v-btn color="accent" block @click="snackbar.clear()"
 												>Clear All Messages</v-btn
 											>
 										</div>
@@ -227,7 +227,7 @@ import PrismCode from "./components/PrismCode";
 import ExampleImage from "./assets/images/example.png";
 import { reactive, computed, watch, ref } from "vue";
 import Switch from "./components/Switch.vue";
-import headerPartial from "./partials/header.vue";
+import HeaderPartial from "./partials/header.vue";
 import { useSnackbar, SnackbarMessages } from "../src";
 import { mdiConnection, mdiStackExchange, mdiCompass, mdiPaletteAdvanced, mdiTimerSand } from "@mdi/js";
 import sampleMessages from "./helpers/sampleData";

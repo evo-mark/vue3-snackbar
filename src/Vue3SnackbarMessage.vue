@@ -56,11 +56,7 @@
 							:is-dismissible="props.message.dismissible"
 							:dismiss="dismissClick"
 						>
-							<RenderedAction
-								:message="props.message"
-								:is-dismissible="props.message.dismissible"
-								:dismiss="dismissClick"
-							/>
+							<RenderedAction />
 						</slot>
 					</div>
 				</div>
@@ -86,9 +82,8 @@
 
 <script setup>
 import { mdiCheckCircle, mdiInformationOutline, mdiAlertOctagonOutline, mdiAlertOutline, mdiClose } from "@mdi/js";
-
 import Vue3Icon from "vue3-icon";
-import { onMounted, watch, ref, computed, isVNode } from "vue";
+import { onMounted, watch, ref, computed, h, toRaw } from "vue";
 
 const emit = defineEmits(["dismiss", "click:action"]);
 const props = defineProps({
@@ -206,15 +201,17 @@ const messageRole = computed(() => (props.message.type === "error" ? "alert" : p
 /**
  * Get the rendered component on a message's action property
  */
-const RenderedAction = computed(() => {
-	const action = props.message.action;
-	if (!action) return null;
-	else if (isVNode(action)) return action;
-	else if (typeof action === "object" && (action.render || action.setup)) {
-		return action;
-	} else if (typeof action === "function") {
-		const vNode = action();
-		return isVNode(vNode) ? action : action();
-	} else return null;
-});
+const RenderedAction = {
+	name: "RenderedAction",
+	render() {
+		const c = computed(() => toRaw(props.message.action));
+		return c.value
+			? h(c.value, {
+					message: props.message,
+					isDismissible: props.message.isDismissible,
+					dismiss: dismissClick,
+				})
+			: null;
+	},
+};
 </script>
