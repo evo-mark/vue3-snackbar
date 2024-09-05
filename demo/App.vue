@@ -197,7 +197,7 @@
 			>
 		</v-footer>
 	</v-app>
-	<vue3-snackbar
+	<Vue3Snackbar
 		:top="options.top"
 		:bottom="options.bottom"
 		:left="options.left"
@@ -219,7 +219,7 @@
 		<template #message-action="{ message }">
 			<v-btn v-if="message.type === 'error'" color="primary">Testing</v-btn>
 		</template>
-	</vue3-snackbar>
+	</Vue3Snackbar>
 </template>
 
 <script setup>
@@ -228,7 +228,7 @@ import ExampleImage from "./assets/images/example.png";
 import { reactive, computed, watch, ref } from "vue";
 import Switch from "./components/Switch.vue";
 import HeaderPartial from "./partials/header.vue";
-import { useSnackbar, SnackbarMessages } from "../src";
+import { useSnackbar, SnackbarMessages, Vue3Snackbar } from "../src";
 import { mdiConnection, mdiStackExchange, mdiCompass, mdiPaletteAdvanced, mdiTimerSand } from "@mdi/js";
 import sampleMessages from "./helpers/sampleData";
 

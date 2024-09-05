@@ -110,7 +110,7 @@ export const propsModel = {
 	},
 	iconPresets: {
 		type: Object,
-		default: () => {},
+		default: () => ({}),
 	},
 	messageTextColor: {
 		type: String,

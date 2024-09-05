@@ -1,12 +1,15 @@
 import EventBus from "./eventbus";
 import { inject, ref } from "vue";
 
+/**
+ * @type { import("vue").Ref<import("./props").SnackbarMessage[]>}
+ */
 export const messages = ref([]);
 export const SnackbarSymbol = Symbol();
 
 /**
  * @callback add
- * @param { SnackbarMessage } message
+ * @param { import("./props").SnackbarMessage } message
  * @returns { void }
  */
 
