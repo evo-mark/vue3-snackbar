@@ -37,8 +37,7 @@ export default [
 			props: {
 				message: Object,
 			},
-			setup(props) {
-				console.log(props);
+			setup() {
 				return () => h("button", {}, "Go to Checkout");
 			},
 		},

@@ -18,6 +18,17 @@
 
 Add a snackbar/toast service to your Vue 3 application and easily alert users about app processes.
 
+## Support Open-Source Software
+
+We're providing this package free-of-charge to the community. However, all development and maintenance costs time, energy and money. So please help fund this project if you can.
+
+<p align="center" style="display:flex;align-items:center;gap:1rem;justify-content:center">
+<a href="https://github.com/sponsors/craigrileyuk" target="_blank">
+<img src="https://img.shields.io/badge/sponsor-GitHub%20Sponsors-fafbfc?style=for-the-badge&logo=github">
+</a>
+<a href="https://www.buymeacoffee.com/craigrileyuk" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+</p>
+
 ---
 
 For full installation instructions and documentation, visit [evoMark](https://evomark.co.uk/open-source-software/vue3-snackbar/).

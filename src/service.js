@@ -7,6 +7,21 @@ import { inject, ref } from "vue";
 export const messages = ref([]);
 export const SnackbarSymbol = Symbol();
 
+const hashCode = (s) => Math.abs(s.split("").reduce((a, b) => ((a << 5) - a + b.charCodeAt(0)) | 0, 0));
+
+let messageId = 1;
+
+EventBus.$on("add", (ev) => {
+	ev = { ...ev };
+	if (!ev.group) ev.group = hashCode(`${ev.type}${ev.title}${ev.text}`).toString(16);
+
+	ev.id = messageId;
+	console.log(`Added ${ev.id} to messages`);
+	messageId++;
+
+	messages.value.push(ev);
+});
+
 /**
  * @callback add
  * @param { import("./props").SnackbarMessage } message

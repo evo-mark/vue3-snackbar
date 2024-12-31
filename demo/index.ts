@@ -1,5 +1,5 @@
 import { createApp } from "vue";
-import { SnackbarService } from "../src";
+import { SnackbarService } from "vue3-snackbar";
 import App from "./App.vue";
 
 import vuetify from "./plugins/vuetify";

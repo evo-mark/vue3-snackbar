@@ -32,7 +32,7 @@
 
 <script setup>
 import SnackbarMessage from "./Vue3SnackbarMessage.vue";
-import { onMounted, onUnmounted, computed, watch } from "vue";
+import { onUnmounted, computed, watch } from "vue";
 import { propsModel } from "./props.js";
 import { messages } from "./service.js";
 import EventBus from "./eventbus";
@@ -43,7 +43,7 @@ const textDirection = useTextDirection();
  * @const {import("./props.js").SnackbarProps} props
  */
 const props = defineProps({ ...propsModel });
-const emit = defineEmits(["added", "dismissed", "removed", "cleared", "click:action"]);
+const emit = defineEmits(["added", "group-added", "dismissed", "removed", "cleared", "click:action"]);
 
 const generatedBaseClasses = computed(() => {
 	return {
@@ -75,47 +75,58 @@ const generatedBaseStyles = computed(() => {
 
 const borderClass = computed(() => (props.border ? `border-${props.border}` : ""));
 
-const hashCode = (s) => Math.abs(s.split("").reduce((a, b) => ((a << 5) - a + b.charCodeAt(0)) | 0, 0));
-
-let messageId = 1;
-
-onMounted(() => {
-	EventBus.$on("add", (ev) => {
-		emit("added", ev);
-		if (!ev.group) ev.group = hashCode(`${ev.type}${ev.title}${ev.text}`).toString(16);
-		// If there's a default duration and no message duration is set, use the default
-		if (props.duration && !ev.duration && ev.duration !== 0) ev.duration = +props.duration;
-		// Find the existing message if one with the same group-key already exists
-		const existingGroup = ev.group && messages.value.find((msg) => msg.group === ev.group);
-
-		if (props.groups === false || !existingGroup) {
-			const message = {
-				...ev,
-				id: messageId,
-				count: 1,
-			};
-			messages.value.push(message);
-			messageId++;
+const remove = (ev, wasDismissed = false) => {
+	if (wasDismissed) emit("dismissed", ev);
+	else emit("removed", ev);
+	messages.value = messages.value.filter((message) => {
+		if (props.groups) {
+			return message.group !== ev.group;
 		} else {
-			existingGroup.count++;
+			return message.id !== ev.id;
 		}
 	});
-});
+};
 
 const formattedMessages = computed(() => {
-	const page = props.limit ? messages.value.slice(props.limit * -1) : [...messages.value];
+	const raw = [...messages.value];
+	const rawMap = raw.reduce((acc, curr) => {
+		if (props.duration && !curr.duration && curr.duration !== 0) curr.duration = +props.duration;
+		const msgId = props.groups ? curr.group : curr.id;
+
+		if (acc.has(msgId)) {
+			const group = acc.get(msgId);
+			curr.count = group.count + 1;
+			acc.set(msgId, curr);
+			emit("group-added", curr);
+			console.log(curr.count);
+		} else {
+			curr.count = 1;
+			emit("added", curr);
+			acc.set(msgId, curr);
+		}
+		return acc;
+	}, new Map());
+	const processed = Array.from(rawMap.values());
+
+	const page = props.limit ? processed.slice(props.limit * -1) : processed;
 	if (props.reverse) return page.reverse();
 	else return page;
 });
-watch(formattedMessages, (msgs) => {
-	const pageIds = msgs.map((msg) => msg.id);
-	const fullIds = messages.value.map((msg) => msg.id);
-	const diffIds = fullIds.filter((id) => !pageIds.includes(id));
-	for (const id of diffIds) {
-		const message = messages.value.find((msg) => msg.id === id);
-		if (message) remove(message, false);
-	}
-});
+watch(
+	formattedMessages,
+	(msgs) => {
+		const pageIds = msgs.map((msg) => msg.id);
+		const fullIds = messages.value.map((msg) => msg.id);
+		const diffIds = fullIds.filter((id) => !pageIds.includes(id));
+		for (const id of diffIds) {
+			const message = messages.value.find((msg) => msg.id === id);
+			if (message) remove(message, false);
+		}
+	},
+	{
+		immediate: true,
+	},
+);
 
 EventBus.$on("clear", () => {
 	emit("cleared");
@@ -126,14 +137,6 @@ onUnmounted(() => {
 	EventBus.$off("add");
 	EventBus.$off("clear");
 });
-
-const remove = (ev, wasDismissed = false) => {
-	if (wasDismissed) emit("dismissed", ev);
-	else emit("removed", ev);
-	messages.value = messages.value.filter((message) => {
-		return message.id !== ev.id;
-	});
-};
 
 const onClickAction = ($event) => {
 	emit("click:action", $event);
