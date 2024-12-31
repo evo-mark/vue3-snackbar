@@ -21,9 +21,14 @@
     "exports": {
         ".": {
             "browser": "./dist/vue3-snackbar.umd.cjs",
-            "require": "./dist/vue3-snackbar.cjs",
-            "import": "./dist/vue3-snackbar.js",
-            "types": "./types/index.d.ts"
+            "require": {
+                "types": "./types/index.d.ts",
+                "default": "./dist/vue3-snackbar.cjs"
+            },
+            "import": {
+                "types": "./types/index.d.ts",
+                "default": "./dist/vue3-snackbar.js"
+            }
         },
         "./styles": "./dist/style.css"
     },
