@@ -30,7 +30,7 @@
                 "default": "./dist/vue3-snackbar.js"
             }
         },
-        "./styles": "./dist/style.css"
+        "./styles": "./dist/vue3-snackbar.css"
     },
     "files": [
         "dist",
