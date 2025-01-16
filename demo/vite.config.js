@@ -14,6 +14,8 @@ export default defineConfig(({ mode }) => {
 				}
 			: {};
 	return {
+		base: "/vue3-snackbar/",
+		assetsDir: "",
 		resolve,
 		plugins: [vue(), vuetify({ autoImport: true })],
 	};
