@@ -165,6 +165,7 @@
 										<div class="text-overline mb-2">Actions</div>
 
 										<div class="mb-4">
+											<v-btn @click="addStatic">Add static message</v-btn>
 											<v-btn color="secondary" block @click="addRandomMessage">Add Message</v-btn>
 										</div>
 										<div class="mb-4">
@@ -228,7 +229,7 @@ import ExampleImage from "./assets/images/example.png";
 import { reactive, computed, watch, ref } from "vue";
 import Switch from "./components/Switch.vue";
 import HeaderPartial from "./partials/header.vue";
-import { useSnackbar, SnackbarMessages, Vue3Snackbar } from "../src";
+import { useSnackbar, SnackbarMessages, Vue3Snackbar } from "vue3-snackbar";
 import { mdiConnection, mdiStackExchange, mdiCompass, mdiPaletteAdvanced, mdiTimerSand } from "@mdi/js";
 import sampleMessages from "./helpers/sampleData";
 
@@ -329,6 +330,13 @@ const iconPresets = {
 	success: {
 		path: mdiAccessPoint,
 	},
+};
+
+const addStatic = () => {
+	snackbar.add({
+		type: "success",
+		text: "This is a snackbar message",
+	});
 };
 </script>
 

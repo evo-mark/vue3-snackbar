@@ -87,7 +87,7 @@ const remove = (ev, wasDismissed = false) => {
 	});
 };
 
-const formattedMessages = computed(() => {
+const formattedMessagesAll = computed(() => {
 	const raw = [...messages.value];
 	const rawMap = raw.reduce((acc, curr) => {
 		if (props.duration && !curr.duration && curr.duration !== 0) curr.duration = +props.duration;
@@ -96,9 +96,9 @@ const formattedMessages = computed(() => {
 		if (acc.has(msgId)) {
 			const group = acc.get(msgId);
 			curr.count = group.count + 1;
+			curr.id = group.id;
 			acc.set(msgId, curr);
 			emit("group-added", curr);
-			console.log(curr.count);
 		} else {
 			curr.count = 1;
 			emit("added", curr);
@@ -106,9 +106,10 @@ const formattedMessages = computed(() => {
 		}
 		return acc;
 	}, new Map());
-	const processed = Array.from(rawMap.values());
-
-	const page = props.limit ? processed.slice(props.limit * -1) : processed;
+	return Array.from(rawMap.values());
+});
+const formattedMessages = computed(() => {
+	const page = props.limit ? formattedMessagesAll.value.slice(props.limit * -1) : formattedMessagesAll.value;
 	if (props.reverse) return page.reverse();
 	else return page;
 });
@@ -116,10 +117,11 @@ watch(
 	formattedMessages,
 	(msgs) => {
 		const pageIds = msgs.map((msg) => msg.id);
-		const fullIds = messages.value.map((msg) => msg.id);
+		const fullIds = formattedMessagesAll.value.map((msg) => msg.id);
 		const diffIds = fullIds.filter((id) => !pageIds.includes(id));
+
 		for (const id of diffIds) {
-			const message = messages.value.find((msg) => msg.id === id);
+			const message = formattedMessagesAll.value.find((msg) => msg.id === id);
 			if (message) remove(message, false);
 		}
 	},

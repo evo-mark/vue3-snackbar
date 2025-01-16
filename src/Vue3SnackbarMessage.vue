@@ -48,7 +48,7 @@
 					<div
 						v-if="$slots['message-action']"
 						:class="props.messageActionClass"
-						@click="emit('click:action', { message: props.message })"
+						@click.stop="emit('click:action', { message: props.message })"
 					>
 						<slot
 							name="message-action"
@@ -70,7 +70,7 @@
 						:is-dismissible="props.message.dismissible"
 						:dismiss="dismissClick"
 					>
-						<button v-if="props.message.dismissible !== false" @click="dismissClick">
+						<button v-if="props.message.dismissible !== false" @click.stop="dismissClick">
 							<vue3-icon type="mdi" :path="mdiClose" />
 						</button>
 					</slot>
@@ -119,13 +119,17 @@ let timeout = null,
 let hasShake = ref(false);
 
 const setMessageTimeout = () => {
+	// If the message duration is set to zero, don't auto-dismiss (if dismissible)
+	const isZero = props.message.duration === 0 || props.message.duration === "0";
+	if (isZero && props.message.dismissible !== false) {
+		return;
+	}
+
 	const messageDuration = !props.message.duration && !props.message.dismissible ? 4000 : props.message.duration;
 	timeout = setTimeout(dismiss, messageDuration);
 };
 
-onMounted(() => {
-	setMessageTimeout();
-});
+onMounted(setMessageTimeout);
 watch(
 	() => props.message.count,
 	(v) => {
@@ -196,7 +200,7 @@ const icon = computed(() => {
 /**
  * Set the aria role of the message
  */
-const messageRole = computed(() => (props.message.type === "error" ? "alert" : props.message?.role ?? "status"));
+const messageRole = computed(() => (props.message.type === "error" ? "alert" : (props.message?.role ?? "status")));
 
 /**
  * Get the rendered component on a message's action property

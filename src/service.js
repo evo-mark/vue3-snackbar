@@ -16,7 +16,6 @@ EventBus.$on("add", (ev) => {
 	if (!ev.group) ev.group = hashCode(`${ev.type}${ev.title}${ev.text}`).toString(16);
 
 	ev.id = messageId;
-	console.log(`Added ${ev.id} to messages`);
 	messageId++;
 
 	messages.value.push(ev);

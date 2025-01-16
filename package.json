@@ -3,10 +3,11 @@
     "version": "2.3.7",
     "author": "Craig Riley",
     "scripts": {
-        "build": "npm run build:types && vite build -c vite-build.config.js",
+        "build": "npm run build:types && vite build",
         "build:types": "vue-tsc && cp ./src/global.d.ts ./types/global.d.ts && npm run copy-ref",
         "demo": "pnpm --filter=demo run dev",
         "demo:build": "pnpm --filter=demo run build",
+        "demo:preview": "pnpm --filter=demo run preview",
         "demo:deploy": "gh-pages -d demo/dist",
         "prepublishOnly": "npm run build",
         "preinstall": "npx only-allow pnpm",
@@ -20,15 +21,10 @@
     "module": "./dist/vue3-snackbar.js",
     "exports": {
         ".": {
-            "browser": "./dist/vue3-snackbar.umd.cjs",
-            "require": {
-                "types": "./types/index.d.ts",
-                "default": "./dist/vue3-snackbar.cjs"
-            },
-            "import": {
-                "types": "./types/index.d.ts",
-                "default": "./dist/vue3-snackbar.js"
-            }
+            "types": "./types/index.d.ts",
+            "umd": "./dist/vue3-snackbar.umd.cjs",
+            "import": "./dist/vue3-snackbar.js",
+            "require": "./dist/vue3-snackbar.cjs"
         },
         "./styles": "./dist/vue3-snackbar.css"
     },
@@ -41,26 +37,26 @@
         "vue3-icon": "^3.0.3"
     },
     "devDependencies": {
-        "@eslint/js": "^9.17.0",
+        "@eslint/js": "^9.18.0",
         "@mdi/js": "^7.4.47",
         "@vitejs/plugin-vue": "^5.2.1",
-        "@vueuse/core": "^12.2.0",
-        "eslint": "^9.17.0",
-        "eslint-config-prettier": "^9.1.0",
+        "@vueuse/core": "^12.4.0",
+        "eslint": "^9.18.0",
+        "eslint-config-prettier": "^10.0.1",
         "eslint-plugin-vue": "^9.32.0",
-        "gh-pages": "^6.2.0",
+        "gh-pages": "^6.3.0",
         "globals": "^15.14.0",
         "jsdoc": "^4.0.4",
         "jsdoc-vuejs": "^4.0.0",
-        "postcss": "^8.4.49",
+        "postcss": "^8.5.1",
         "postcss-nested": "^7.0.2",
         "prettier": "^3.4.2",
         "prismjs": "^1.29.0",
         "roboto-fontface": "^0.10.0",
-        "sass": "^1.83.0",
+        "sass": "^1.83.4",
         "sass-loader": "^16.0.4",
-        "typescript": "^5.7.2",
-        "vite": "^6.0.6",
+        "typescript": "^5.7.3",
+        "vite": "^6.0.7",
         "vue": "^3.5.13",
         "vue-tsc": "^2.2.0"
     },
