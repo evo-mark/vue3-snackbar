@@ -77,6 +77,10 @@ const generatedBaseStyles = computed(() => {
 const borderClass = computed(() => (props.border ? `border-${props.border}` : ""));
 
 const remove = (ev, wasDismissed = false) => {
+	if (Object.hasOwn(ev, "onRemoved") && typeof ev.onRemoved === "function") {
+		ev.onRemoved(ev, wasDismissed);
+	}
+
 	if (wasDismissed) emit("dismissed", ev);
 	else emit("removed", ev);
 	messages.value = messages.value.filter((message) => {

@@ -39,6 +39,7 @@ const HTMLElementShim = typeof window !== "undefined" ? HTMLElement : Object;
  * @property { boolean } [dismissible] Can the message be dismissed manually?
  * @property { LiveRegionRole } [role] The aria-role of the message
  * @property { Renderable } [action] Any valid Vue component to render in the action slot
+ * @property {(ev: SnackbarMessage, wasDismissed: boolean) => void} [onRemoved] A callback for when the message is removed from the stack
  */
 
 /**

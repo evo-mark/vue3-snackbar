@@ -338,6 +338,9 @@ const addStatic = () => {
 	snackbar.add({
 		type: "success",
 		text: "This is a snackbar message",
+		onRemoved(message, wasDismissed) {
+			console.log("Removed", message);
+		},
 	});
 };
 </script>
