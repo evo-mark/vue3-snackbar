@@ -1,8 +1,8 @@
 {
 	"include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.js", "src/**/*.vue"],
 	"compilerOptions": {
-        "module": "esnext",
-        "types": ["./src/global.d.ts"],
+		"module": "esnext",
+		"types": ["./src/global.d.ts"],
 		"target": "esnext",
 		"declaration": true,
 		"esModuleInterop": true,

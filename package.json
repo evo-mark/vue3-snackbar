@@ -1,89 +1,89 @@
 {
-    "name": "vue3-snackbar",
-    "version": "2.4.0",
-    "author": "Craig Riley",
-    "scripts": {
-        "build": "npm run build:types && vite build",
-        "build:types": "vue-tsc && cp ./src/global.d.ts ./types/global.d.ts && npm run copy-ref",
-        "demo": "pnpm --filter=demo run dev",
-        "demo:build": "pnpm --filter=demo run build",
-        "demo:preview": "pnpm --filter=demo run preview",
-        "demo:deploy": "gh-pages -d demo/dist",
-        "prepublishOnly": "npm run build",
-        "preinstall": "npx only-allow pnpm",
-        "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
-        "format": "prettier .  --write",
-        "copy-ref": "echo '/// <reference path=\"./global.d.ts\" />\n' | cat - ./types/index.d.ts > temp && mv temp ./types/index.d.ts"
-    },
-    "type": "module",
-    "types": "./types/index.d.ts",
-    "main": "./dist/vue3-snackbar.cjs",
-    "module": "./dist/vue3-snackbar.js",
-    "exports": {
-        ".": {
-            "types": "./types/index.d.ts",
-            "umd": "./dist/vue3-snackbar.umd.cjs",
-            "import": "./dist/vue3-snackbar.js",
-            "require": "./dist/vue3-snackbar.cjs"
-        },
-        "./styles": "./dist/vue3-snackbar.css"
-    },
-    "files": [
-        "dist",
-        "types"
-    ],
-    "dependencies": {
-        "tiny-emitter": "^2.1.0",
-        "vue3-icon": "^3.0.3"
-    },
-    "devDependencies": {
-        "@eslint/js": "^9.18.0",
-        "@mdi/js": "^7.4.47",
-        "@vitejs/plugin-vue": "^5.2.1",
-        "@vueuse/core": "^12.4.0",
-        "eslint": "^9.18.0",
-        "eslint-config-prettier": "^10.0.1",
-        "eslint-plugin-vue": "^9.32.0",
-        "gh-pages": "^6.3.0",
-        "globals": "^15.14.0",
-        "jsdoc": "^4.0.4",
-        "jsdoc-vuejs": "^4.0.0",
-        "postcss": "^8.5.1",
-        "postcss-nested": "^7.0.2",
-        "prettier": "^3.4.2",
-        "prismjs": "^1.29.0",
-        "roboto-fontface": "^0.10.0",
-        "sass": "^1.83.4",
-        "sass-loader": "^16.0.4",
-        "typescript": "^5.7.3",
-        "vite": "^6.0.7",
-        "vue": "^3.5.13",
-        "vue-tsc": "^2.2.0"
-    },
-    "peerDependencies": {
-        "vue": "^3.0.0"
-    },
-    "browserslist": [
-        "> 1%",
-        "last 2 versions",
-        "not dead"
-    ],
-    "bugs": {
-        "url": "https://github.com/evo-mark/vue3-snackbar/issues"
-    },
-    "homepage": "https://github.com/evo-mark/vue3-snackbar#readme",
-    "keywords": [
-        "Vue",
-        "Vue3",
-        "snackbar",
-        "toast",
-        "alerts",
-        "messages"
-    ],
-    "license": "MIT",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/evo-mark/vue3-snackbar.git"
-    },
-    "packageManager": "pnpm@8.14.3+sha256.2d0363bb6c314daa67087ef07743eea1ba2e2d360c835e8fec6b5575e4ed9484"
+	"name": "vue3-snackbar",
+	"version": "2.4.0",
+	"author": "Craig Riley",
+	"scripts": {
+		"build": "npm run build:types && vite build",
+		"build:types": "vue-tsc && cp ./src/global.d.ts ./types/global.d.ts && npm run copy-ref",
+		"demo": "pnpm --filter=demo run dev",
+		"demo:build": "pnpm --filter=demo run build",
+		"demo:preview": "pnpm --filter=demo run preview",
+		"demo:deploy": "gh-pages -d demo/dist",
+		"prepublishOnly": "npm run build",
+		"preinstall": "npx only-allow pnpm",
+		"lint": "eslint --fix src",
+		"format": "prettier .  --write",
+		"copy-ref": "echo '/// <reference path=\"./global.d.ts\" />\n' | cat - ./types/index.d.ts > temp && mv temp ./types/index.d.ts"
+	},
+	"type": "module",
+	"types": "./types/index.d.ts",
+	"main": "./dist/vue3-snackbar.cjs",
+	"module": "./dist/vue3-snackbar.js",
+	"exports": {
+		".": {
+			"types": "./types/index.d.ts",
+			"umd": "./dist/vue3-snackbar.umd.cjs",
+			"import": "./dist/vue3-snackbar.js",
+			"require": "./dist/vue3-snackbar.cjs"
+		},
+		"./styles": "./dist/vue3-snackbar.css"
+	},
+	"files": [
+		"dist",
+		"types"
+	],
+	"dependencies": {
+		"tiny-emitter": "^2.1.0",
+		"vue3-icon": "^3.0.3"
+	},
+	"devDependencies": {
+		"@eslint/js": "^9.27.0",
+		"@mdi/js": "^7.4.47",
+		"@vitejs/plugin-vue": "^5.2.4",
+		"@vueuse/core": "^13.3.0",
+		"eslint": "^9.27.0",
+		"eslint-config-prettier": "^10.1.5",
+		"eslint-plugin-vue": "^10.1.0",
+		"gh-pages": "^6.3.0",
+		"globals": "^16.2.0",
+		"jsdoc": "^4.0.4",
+		"jsdoc-vuejs": "^4.0.0",
+		"postcss": "^8.5.3",
+		"postcss-nested": "^7.0.2",
+		"prettier": "^3.5.3",
+		"prismjs": "^1.30.0",
+		"roboto-fontface": "^0.10.0",
+		"sass": "^1.89.0",
+		"sass-loader": "^16.0.5",
+		"typescript": "^5.8.3",
+		"vite": "^6.3.5",
+		"vue": "^3.5.15",
+		"vue-tsc": "^2.2.10"
+	},
+	"peerDependencies": {
+		"vue": "^3.0.0"
+	},
+	"browserslist": [
+		"> 1%",
+		"last 2 versions",
+		"not dead"
+	],
+	"bugs": {
+		"url": "https://github.com/evo-mark/vue3-snackbar/issues"
+	},
+	"homepage": "https://github.com/evo-mark/vue3-snackbar#readme",
+	"keywords": [
+		"Vue",
+		"Vue3",
+		"snackbar",
+		"toast",
+		"alerts",
+		"messages"
+	],
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/evo-mark/vue3-snackbar.git"
+	},
+	"packageManager": "pnpm@8.14.3+sha256.2d0363bb6c314daa67087ef07743eea1ba2e2d360c835e8fec6b5575e4ed9484"
 }

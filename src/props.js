@@ -67,6 +67,7 @@ const HTMLElementShim = typeof window !== "undefined" ? HTMLElement : Object;
  * @property { boolean } shadow Add shadow effect to messages
  * @property { number } limit The maximum number of messages/message groups to show
  * @property { IconPresets } iconPresets The preset icon settings for standard message types
+ * @property { string } contentWidth The CSS width string for the snackbar content
  *
  */
 export const propsModel = {
@@ -120,18 +121,9 @@ export const propsModel = {
 		type: String,
 		default: "currentColor",
 	},
-	/* ******************************************
-	 * OTHER PROPS
-	 ****************************************** */
-	attach: {
-		type: [String, HTMLElementShim],
-		default: "body",
-	},
-	border: {
-		type: String,
-		default: "",
-		validator: (v) => ["top", "bottom", "left", "right", ""].includes(v),
-	},
+	/* *********************************************
+	 * BACKGROUND PROPS
+	 * ******************************************* */
 	backgroundOpacity: {
 		type: [String, Number],
 		default: 0.12,
@@ -147,9 +139,40 @@ export const propsModel = {
 		type: String,
 		default: "#fff",
 	},
+	/* *********************************************
+	 * BEHAVIOUR PROPS
+	 * ******************************************* */
 	duration: {
 		type: [Number, String],
 		default: null,
+	},
+	reverse: {
+		type: Boolean,
+		default: false,
+	},
+	limit: {
+		type: Number,
+		default: null,
+	},
+	dismissOnActionClick: {
+		type: Boolean,
+		default: true,
+	},
+	groups: {
+		type: Boolean,
+		default: false,
+	},
+	attach: {
+		type: [String, HTMLElementShim],
+		default: "body",
+	},
+	/* ******************************************
+	 * OTHER PROPS
+	 ****************************************** */
+	border: {
+		type: String,
+		default: "",
+		validator: (v) => ["top", "bottom", "left", "right", ""].includes(v),
 	},
 	messageClass: {
 		type: String,
@@ -166,24 +189,12 @@ export const propsModel = {
 		type: Boolean,
 		default: false,
 	},
-	reverse: {
-		type: Boolean,
-		default: false,
-	},
-	limit: {
-		type: Number,
-		default: null,
-	},
-	groups: {
-		type: Boolean,
-		default: false,
-	},
 	shadow: {
 		type: Boolean,
 		default: false,
 	},
-	dismissOnActionClick: {
-		type: Boolean,
-		default: true,
+	contentWidth: {
+		type: String,
+		default: "min(50vw, 350px)",
 	},
 };

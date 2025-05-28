@@ -165,8 +165,10 @@
 										<div class="text-overline mb-2">Actions</div>
 
 										<div class="mb-4">
-											<v-btn @click="addStatic">Add static message</v-btn>
-											<v-btn color="secondary" block @click="addRandomMessage">Add Message</v-btn>
+											<v-btn class="mb-4" block @click="addStatic">Add static message</v-btn>
+											<v-btn color="secondary" block @click="addRandomMessage"
+												>Add Random Message</v-btn
+											>
 										</div>
 										<div class="mb-4">
 											<v-btn color="accent" block @click="snackbar.clear()"

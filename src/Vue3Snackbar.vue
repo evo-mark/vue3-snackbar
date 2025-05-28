@@ -70,6 +70,7 @@ const generatedBaseStyles = computed(() => {
 		"--base-background-color": props.baseBackgroundColor,
 		"--message-text-color": props.messageTextColor,
 		"--message-icon-color": props.messageIconColor,
+		"--snackbar-content-width": props.contentWidth,
 	};
 });
 
