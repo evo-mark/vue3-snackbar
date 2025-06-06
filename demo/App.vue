@@ -115,6 +115,16 @@
 												/>
 											</div>
 											<div class="mb-4">
+												<v-slider
+													v-if="options.border"
+													v-model="options.borderWidth"
+													label="Border Width"
+													clearable
+													hide-details
+													thumb-label="auto"
+												/>
+											</div>
+											<div class="mb-4">
 												<v-text-field
 													v-model="options.baseBackgroundColor"
 													label="Base Background Colour"
@@ -154,10 +164,10 @@
 												<Switch v-model:checked="options.bottom" label="Bottom" />
 											</div>
 											<div class="mb-4">
-												<Switch v-model:checked="options.left" label="Left" />
+												<Switch v-model:checked="options.start" label="Start" />
 											</div>
 											<div class="mb-4">
-												<Switch v-model:checked="options.right" label="Right" />
+												<Switch v-model:checked="options.end" label="End" />
 											</div>
 										</div>
 									</v-col>
@@ -205,12 +215,15 @@
 		:bottom="options.bottom"
 		:left="options.left"
 		:right="options.right"
+		:start="options.start"
+		:end="options.end"
 		:duration="options.duration"
 		:dense="options.dense"
 		:groups="options.groups"
 		:reverse="options.reverse"
-		:shadow="options.shadow"
+		:shadow="options.shadow ? 'md' : false"
 		:border="options.border"
+		:border-width="options.borderWidth"
 		:background-opacity="options.backgroundOpacity"
 		:background-color="options.backgroundColor"
 		:base-background-color="options.baseBackgroundColor"
@@ -254,7 +267,9 @@ const options = reactive({
 	top: false,
 	bottom: true,
 	left: false,
-	right: true,
+	right: false,
+	start: false,
+	end: true,
 	duration: 0,
 	limit: null,
 	dense: false,
@@ -262,6 +277,7 @@ const options = reactive({
 	reverse: false,
 	shadow: false,
 	border: "",
+	borderWidth: 8,
 	backgroundOpacity: 0.12,
 	backgroundColor: "currentColor",
 	baseBackgroundColor: "#fff",
@@ -274,6 +290,8 @@ const code = computed(() => {
 	if (options.bottom) position.push("bottom");
 	if (options.left) position.push("left");
 	if (options.right) position.push("right");
+	if (options.start) position.push("start");
+	if (options.end) position.push("end");
 	const other = [];
 	if (options.duration) other.push(`:duration="${options.duration}"`);
 	if (options.limit) other.push(`:limit="${options.limit}"`);
@@ -313,6 +331,14 @@ const borderOptions = [
 	{
 		value: "right",
 		title: "Right Border",
+	},
+	{
+		value: "start",
+		title: "Start Border",
+	},
+	{
+		value: "end",
+		title: "End Border",
 	},
 	{
 		value: "top",

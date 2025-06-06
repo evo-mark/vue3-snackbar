@@ -51,6 +51,6 @@ export default [
 			type: "mdi",
 		},
 		textColor: "#99ff99",
-		iconColor: "#fff",
+		iconColor: "#336633",
 	},
 ];

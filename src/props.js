@@ -55,7 +55,7 @@ const HTMLElementShim = typeof window !== "undefined" ? HTMLElement : Object;
  * @property { string } messageTextColor Text colour for the default message
  * @property { string } messageIconColor Icon colour for the default message
  * @property { string|HTMLElementShim } attach HTML element to attach the container to
- * @property { "top"|"bottom"|"left"|"right"} border Use the alternative border-style messages
+ * @property { "top"|"bottom"|"left"|"right"|"start"|"end"} border Use the alternative border-style messages
  * @property { string|number } backgroundOpacity The background colour opacity when using border-style messages
  * @property { string } backgroundColor Background colour when using border-style messages
  * @property { string } baseBackgroundColor Base background colour when using border-style messages
@@ -88,6 +88,14 @@ export const propsModel = {
 		default: false,
 	},
 	right: {
+		type: Boolean,
+		default: false,
+	},
+	start: {
+		type: Boolean,
+		default: false,
+	},
+	end: {
 		type: Boolean,
 		default: false,
 	},
@@ -173,7 +181,7 @@ export const propsModel = {
 	border: {
 		type: String,
 		default: "",
-		validator: (v) => ["top", "bottom", "left", "right", ""].includes(v),
+		validator: (v) => ["top", "bottom", "left", "right", "start", "end", ""].includes(v),
 	},
 	messageClass: {
 		type: String,
@@ -191,11 +199,16 @@ export const propsModel = {
 		default: false,
 	},
 	shadow: {
-		type: Boolean,
+		type: [Boolean, String],
 		default: false,
+		validator: (v) => v === true || v === false || ["xs", "sm", "md", "lg", "xl", "2xl"].includes(v),
 	},
 	contentWidth: {
 		type: String,
 		default: "min(50vw, 350px)",
+	},
+	borderWidth: {
+		type: [String, Number],
+		default: 8,
 	},
 };

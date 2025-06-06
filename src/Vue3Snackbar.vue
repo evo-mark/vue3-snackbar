@@ -2,8 +2,8 @@
 	<teleport :to="props.attach">
 		<section
 			id="vue3-snackbar--container"
-			:class="[generatedBaseClasses]"
 			class="vue3-snackbar"
+			:class="[generatedBaseClasses]"
 			:style="generatedBaseStyles"
 			aria-live="polite"
 		>
@@ -46,17 +46,29 @@ const props = defineProps({ ...propsModel });
 const emit = defineEmits(["added", "group-added", "dismissed", "removed", "cleared", "click:action"]);
 
 const generatedBaseClasses = computed(() => {
+	if ((props.left || props.right) && (props.start || props.end)) {
+		console.warn("[Vue3 Snackbar] The left/right and start/end position properties should not be used together.");
+	}
 	return {
 		"is-top": props.top,
 		"is-bottom": props.top === false && props.bottom,
 		"is-left": props.left,
 		"is-right": props.left === false && props.right,
+		"is-start": props.start,
+		"is-end": props.start === false && props.end,
 		"is-middle": props.top === false && props.bottom === false,
-		"is-centre": props.left === false && props.right === false,
-		"has-shadow": props.shadow,
+		"is-centre": ["left", "right", "start", "end"].every((pos) => props[pos] === false),
+		"shadow-md": props.shadow === true,
+		[`shadow-${props.shadow}`]: typeof props.shadow === "string",
 		"is-rtl": textDirection.value === "rtl",
 	};
 });
+
+const normaliseUnit = (unit) => {
+	if (typeof unit === "number" || /[^\d]/.test(unit) === false) {
+		return `${unit}px`;
+	} else return unit;
+};
 
 const generatedBaseStyles = computed(() => {
 	return {
@@ -71,6 +83,7 @@ const generatedBaseStyles = computed(() => {
 		"--message-text-color": props.messageTextColor,
 		"--message-icon-color": props.messageIconColor,
 		"--snackbar-content-width": props.contentWidth,
+		"--snackbar-border-width": normaliseUnit(props.borderWidth),
 	};
 });
 
