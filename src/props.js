@@ -35,7 +35,7 @@ const HTMLElementShim = typeof window !== "undefined" ? HTMLElement : Object;
  * @property { "warning"|"error"|"info"|"success"|null } [type] The classification of the message
  * @property { string } [title] An optional title string for the message
  * @property { string } text The text content of the message
- * @property { string } [background] The background color of the message
+ * @property { string } [background] The background colour of the message
  * @property { number } [duration] In ms, the time before the message expires
  * @property { boolean } [dismissible] Can the message be dismissed manually?
  * @property { LiveRegionRole } [role] The aria-role of the message
@@ -66,11 +66,10 @@ const HTMLElementShim = typeof window !== "undefined" ? HTMLElement : Object;
  * @property { boolean } dense Reduce padding on the y-axis for snackbar messages
  * @property { boolean } reverse Reverse the display order of snackbar messages
  * @property { boolean } groups Use snackbar groups with messages with the same group-key
- * @property { boolean } shadow Add shadow effect to messages
+ * @property { boolean|"xs"|"sm"|"md"|"lg"|"xl"|"2xl" } shadow Add shadow effect to messages
  * @property { number } limit The maximum number of messages/message groups to show
  * @property { IconPresets } iconPresets The preset icon settings for standard message types
  * @property { string } contentWidth The CSS width string for the snackbar content
- *
  */
 export const propsModel = {
 	/* ******************************************

@@ -1,6 +1,6 @@
 {
 	"name": "vue3-snackbar",
-	"version": "2.5.0",
+	"version": "2.5.1",
 	"author": "Craig Riley",
 	"scripts": {
 		"build": "npm run build:types && vite build",
@@ -37,28 +37,28 @@
 		"vue3-icon": "^3.0.3"
 	},
 	"devDependencies": {
-		"@eslint/js": "^9.27.0",
+		"@eslint/js": "^9.34.0",
 		"@mdi/js": "^7.4.47",
-		"@vitejs/plugin-vue": "^5.2.4",
-		"@vueuse/core": "^13.3.0",
-		"eslint": "^9.27.0",
-		"eslint-config-prettier": "^10.1.5",
-		"eslint-plugin-vue": "^10.1.0",
+		"@vitejs/plugin-vue": "^6.0.1",
+		"@vueuse/core": "^13.9.0",
+		"eslint": "^9.34.0",
+		"eslint-config-prettier": "^10.1.8",
+		"eslint-plugin-vue": "^10.4.0",
 		"gh-pages": "^6.3.0",
-		"globals": "^16.2.0",
+		"globals": "^16.3.0",
 		"jsdoc": "^4.0.4",
 		"jsdoc-vuejs": "^4.0.0",
-		"postcss": "^8.5.3",
+		"postcss": "^8.5.6",
 		"postcss-nested": "^7.0.2",
-		"prettier": "^3.5.3",
+		"prettier": "^3.6.2",
 		"prismjs": "^1.30.0",
 		"roboto-fontface": "^0.10.0",
-		"sass": "^1.89.0",
+		"sass": "^1.91.0",
 		"sass-loader": "^16.0.5",
-		"typescript": "^5.8.3",
-		"vite": "^6.3.5",
-		"vue": "^3.5.15",
-		"vue-tsc": "^2.2.10"
+		"typescript": "^5.9.2",
+		"vite": "npm:rolldown-vite@^7.1.5",
+		"vue": "^3.5.20",
+		"vue-tsc": "^3.0.6"
 	},
 	"peerDependencies": {
 		"vue": "^3.0.0"
