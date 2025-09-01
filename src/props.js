@@ -35,6 +35,7 @@ const HTMLElementShim = typeof window !== "undefined" ? HTMLElement : Object;
  * @property { "warning"|"error"|"info"|"success"|null } [type] The classification of the message
  * @property { string } [title] An optional title string for the message
  * @property { string } text The text content of the message
+ * @property { string } [background] The background color of the message
  * @property { number } [duration] In ms, the time before the message expires
  * @property { boolean } [dismissible] Can the message be dismissed manually?
  * @property { LiveRegionRole } [role] The aria-role of the message
