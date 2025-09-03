@@ -57,7 +57,14 @@
 					<v-col cols="8">
 						<div class="mr-auto">
 							<v-card class="d-flex flex-column pa-6" :elevation="4">
-								<h4 class="mb-4">Component Properties</h4>
+								<h4>Component Properties</h4>
+								<p class="text-subtitle-2 mb-4">
+									This is <strong>not</strong> an exhaustive collection of all available props. See
+									<a href="https://evomark.co.uk/open-source-software/vue3-snackbar/" target="_blank"
+										>documentation</a
+									>
+									for a complete list.
+								</p>
 
 								<v-row>
 									<v-col cols="6">
@@ -121,11 +128,11 @@
 													label="Border Width"
 													clearable
 													hide-details
-													thumb-label="auto"
+													thumb-label
 												/>
 											</div>
 											<div class="mb-4">
-												<v-text-field
+												<VColorInput
 													v-model="options.baseBackgroundColor"
 													label="Base Background Colour"
 													:disabled="!options.border"
@@ -175,7 +182,6 @@
 										<div class="text-overline mb-2">Actions</div>
 
 										<div class="mb-4">
-											<v-btn class="mb-4" block @click="addStatic">Add static message</v-btn>
 											<v-btn color="secondary" block @click="addRandomMessage"
 												>Add Random Message</v-btn
 											>
@@ -239,6 +245,7 @@
 </template>
 
 <script setup>
+import { VColorInput } from "vuetify/labs/VColorInput";
 import PrismCode from "./components/PrismCode";
 import ExampleImage from "./assets/images/example.png";
 import { reactive, computed, watch, ref } from "vue";
@@ -358,16 +365,6 @@ const iconPresets = {
 	success: {
 		path: mdiAccessPoint,
 	},
-};
-
-const addStatic = () => {
-	snackbar.add({
-		type: "success",
-		text: "This is a snackbar message",
-		onRemoved(message, wasDismissed) {
-			console.log("Removed", message);
-		},
-	});
 };
 </script>
 

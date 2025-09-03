@@ -26,4 +26,15 @@ export default createVuetify({
 			vueLightTheme,
 		},
 	},
+	defaults: {
+		VColorInput: {
+			pipLocation: "prepend-inner",
+			pipVariant: "outlined",
+			colorPip: true,
+			landscape: true,
+			mode: "hexa",
+			modes: ["hexa"],
+			showSwatches: true,
+		},
+	},
 });

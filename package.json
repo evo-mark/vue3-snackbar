@@ -1,6 +1,6 @@
 {
 	"name": "vue3-snackbar",
-	"version": "2.5.1",
+	"version": "2.5.2",
 	"author": "Craig Riley",
 	"scripts": {
 		"build": "npm run build:types && vite build",
@@ -53,11 +53,11 @@
 		"prettier": "^3.6.2",
 		"prismjs": "^1.30.0",
 		"roboto-fontface": "^0.10.0",
-		"sass": "^1.91.0",
+		"sass": "^1.92.0",
 		"sass-loader": "^16.0.5",
 		"typescript": "^5.9.2",
 		"vite": "npm:rolldown-vite@^7.1.5",
-		"vue": "^3.5.20",
+		"vue": "^3.5.21",
 		"vue-tsc": "^3.0.6"
 	},
 	"peerDependencies": {

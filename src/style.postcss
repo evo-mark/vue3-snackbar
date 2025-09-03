@@ -104,7 +104,6 @@
 		border-color: currentColor;
 		border-width: 0;
 		&::before {
-			border-radius: inherit;
 			position: absolute;
 			top: 0;
 			bottom: 0;
@@ -134,21 +133,45 @@
 
 	&.border-left {
 		border-left-width: var(--snackbar-border-width);
+		&:before {
+			border-top-right-radius: inherit;
+			border-bottom-right-radius: inherit;
+		}
 	}
 	&.border-right {
 		border-right-width: var(--snackbar-border-width);
+		&:before {
+			border-top-left-radius: inherit;
+			border-bottom-left-radius: inherit;
+		}
 	}
 	&.border-top {
 		border-top-width: var(--snackbar-border-width);
+		&:before {
+			border-bottom-left-radius: inherit;
+			border-bottom-right-radius: inherit;
+		}
 	}
 	&.border-bottom {
 		border-bottom-width: var(--snackbar-border-width);
+		&:before {
+			border-top-left-radius: inherit;
+			border-top-right-radius: inherit;
+		}
 	}
 	&.border-start {
 		border-inline-start-width: var(--snackbar-border-width);
+		&::before {
+			border-start-end-radius: inherit;
+			border-end-end-radius: inherit;
+		}
 	}
 	&.border-end {
 		border-inline-end-width: var(--snackbar-border-width);
+		&:before {
+			border-start-start-radius: inherit;
+			border-end-start-radius: inherit;
+		}
 	}
 
 	&.success:not(.has-background):not(.has-border) {
