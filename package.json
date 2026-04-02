@@ -10,7 +10,6 @@
 		"demo:preview": "pnpm --filter=demo run preview",
 		"demo:deploy": "gh-pages -d demo/dist",
 		"prepublishOnly": "npm run build",
-		"preinstall": "npx only-allow pnpm",
 		"lint": "eslint --fix src",
 		"format": "prettier .  --write",
 		"copy-ref": "echo '/// <reference path=\"./global.d.ts\" />\n' | cat - ./types/index.d.ts > temp && mv temp ./types/index.d.ts"
