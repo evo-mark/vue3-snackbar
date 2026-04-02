@@ -1,6 +1,6 @@
 {
 	"name": "vue3-snackbar",
-	"version": "2.5.2",
+	"version": "2.5.3",
 	"author": "Craig Riley",
 	"scripts": {
 		"build": "npm run build:types && vite build",
