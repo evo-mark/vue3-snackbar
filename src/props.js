@@ -70,6 +70,7 @@ const HTMLElementShim = typeof window !== "undefined" ? HTMLElement : Object;
  * @property { number } limit The maximum number of messages/message groups to show
  * @property { IconPresets } iconPresets The preset icon settings for standard message types
  * @property { string } contentWidth The CSS width string for the snackbar content
+ * @property { string } transitionName The transition name to apply to the TransitionGroup
  */
 export const propsModel = {
 	/* ******************************************
@@ -211,4 +212,8 @@ export const propsModel = {
 		type: [String, Number],
 		default: 8,
 	},
+	transitionName: {
+		type: String,
+		default: "vue3-snackbar-message"
+	}
 };
