@@ -7,7 +7,7 @@
 			:style="generatedBaseStyles"
 			aria-live="polite"
 		>
-			<transition-group name="vue3-snackbar-message" tag="div" class="vue3-snackbar--messages">
+			<transition-group :name="props.transitionName" tag="div" class="vue3-snackbar--messages">
 				<SnackbarMessage
 					v-for="message in formattedMessages"
 					:key="message.id"
